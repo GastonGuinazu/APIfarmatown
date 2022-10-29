@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hrCPJ7ZVHATMlutKSXnjBtJoPyl5fd6SlLDKdEk334l0dEr0ABCgAfIxOlYYN8ZwEvT36HvVW3Syveh5oQJjxg==",
+  "dgSpecHash": "OK2diQPIZJwwO9jrLeF03CH6HueVnvJXG3Hxr3nUP6DhhaWTjI15r17LroHLjtRex56hOXYaArbpLY+ItzKW5A==",
   "success": true,
-  "projectFilePath": "c:\\Users\\Klosazz\\Desktop\\farmatownApi\\API\\API.csproj",
+  "projectFilePath": "f:\\Repositorios\\APIfarmatown\\farmatownApi\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Klosazz\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Klosazz\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

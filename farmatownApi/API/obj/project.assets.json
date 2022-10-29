@@ -2068,11 +2068,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Klosazz\\Desktop\\farmatownApi\\API\\API.csproj",
+      "projectUniqueName": "f:\\Repositorios\\APIfarmatown\\farmatownApi\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\Klosazz\\Desktop\\farmatownApi\\API\\API.csproj",
+      "projectPath": "f:\\Repositorios\\APIfarmatown\\farmatownApi\\API\\API.csproj",
       "packagesPath": "C:\\Users\\Klosazz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Klosazz\\Desktop\\farmatownApi\\API\\obj\\",
+      "outputPath": "f:\\Repositorios\\APIfarmatown\\farmatownApi\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Klosazz\\AppData\\Roaming\\NuGet\\NuGet.Config",
