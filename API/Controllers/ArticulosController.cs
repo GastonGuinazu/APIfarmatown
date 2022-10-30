@@ -22,7 +22,8 @@ public class ArticulosController : ControllerBase
     var articulos = await _context.Articulos
                     .Select(x => new ArticuloModel {
                       idArticulo = x.IdArticulo,
-                      nombreArticulo = x.Nombre
+                      nombreArticulo = x.Nombre,
+                      precioUnitario = x.PrecioUnitario
                     })
                     .ToListAsync();
     

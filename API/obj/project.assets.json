@@ -2063,19 +2063,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\gonza\\.nuget\\packages\\": {}
+    "C:\\Users\\Klosazz\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\gonza\\Documents\\GitHub\\APIfarmatown\\API\\API.csproj",
+      "projectUniqueName": "f:\\Repositorios\\APIfarmatown\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "c:\\Users\\gonza\\Documents\\GitHub\\APIfarmatown\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\gonza\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\gonza\\Documents\\GitHub\\APIfarmatown\\API\\obj\\",
+      "projectPath": "f:\\Repositorios\\APIfarmatown\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\Klosazz\\.nuget\\packages\\",
+      "outputPath": "f:\\Repositorios\\APIfarmatown\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\gonza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Klosazz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
