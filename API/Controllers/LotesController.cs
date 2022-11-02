@@ -132,7 +132,7 @@ public class LotesController : ControllerBase
     // }
 
     [HttpPost("InsertarLote")]
-    public async Task<ActionResult<LoteModel>> InsertarLote(LoteCreateModel lote)
+    public async Task<ActionResult<int>> InsertarLote(LoteCreateModel lote)
     {
         var newLote = new Lote
         {            
@@ -143,15 +143,10 @@ public class LotesController : ControllerBase
         };
         _context.Lotes.Add(newLote);
         await _context.SaveChangesAsync();
+        var idLote=newLote.IdLote;
 
-        var loteCreado = new LoteModel
-        {   
-            IdLote = newLote.IdLote,
-            FechaLote = newLote.FechaLote,
-            Total = newLote.Total         
-
-        };
-        return Ok(loteCreado);
+        
+        return Ok(idLote);
     }
 
     [HttpPost("InsertarDetalleLote{idLote}")]
