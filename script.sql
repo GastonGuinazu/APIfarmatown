@@ -1188,6 +1188,33 @@ CREATE TRIGGER dbo.TRIG_ACTUALIZAR_TOTAL_FACTURA ON [detallesFactura]
 	from facturas F inner join
 	deleted df on df.idFactura=f.idFactura
 
+--RESTAR AL TOTAL DE LA FACTURA DESPUES DE QUITAR DETALLE	
+--CREATE TRIGGER dbo.TRIG_ACTUALIZAR_TOTAL_DETALLE_LOTE ON [detalle_lote]
+--	for Delete
+--	as
+--	Update L set L.total = L.total - dl.precio_compra * dl.cantidad_comprada
+--	from lotes L inner join
+--	deleted dl on dl.id_lote=L.id_lote
+
+
+select * from lotes
+insert into detalle_lote (idArticulo, id_lote, cantidad_comprada, precio_compra) values 
+(25, 38, 1, 2500),(30,38,1,800)
+
+CREATE FUNCTION make_sum() RETURNS TRIGGER
+    AS $$
+        BEGIN
+            UPDATE payment
+                SET total_price = (select sum(price) from basket where basket_id = new.basket_id);
+            RETURN NULL;
+    END;$$ LANGUAGE plpgsql;
+    
+CREATE TRIGGER make_sum
+AFTER INSERT ON basket FOR EACH ROW EXECUTE PROCEDURE make_sum(); 
+	
+
+
+
 	create view vistaArticulosXAño as
 	select a.nombre, sum(df.cantidad) as cantidad, year(f.fecha) as año
 	from articulos a join detallesFactura df on df.idArticulo = a.idArticulo
@@ -1200,8 +1227,10 @@ CREATE TRIGGER dbo.TRIG_ACTUALIZAR_TOTAL_FACTURA ON [detallesFactura]
 	join facturas f on f.idFactura = df.idFactura
 	group by a.nombre, fecha
 
-	create view vistaArticulosAVencer as
+	alter view vistaArticulosAVencer as
 	select a.nombre, l.fecha_lote
 	from lotes l join detalle_lote dl on l.id_lote = dl.id_lote
 	join articulos a on a.idArticulo = dl.idArticulo
+	where DATEDIFF(MONTH, l.fecha_lote, GETDATE()) >= 0
 
+	select * from detalle_lote
