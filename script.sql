@@ -1,1 +1,1207 @@
-﻿{"metadata":{"kernel_spec":{"name":"SQL","language":"sql","display_name":"SQL"},"language_info":{"name":"sql","version":""}},"nbformat":4,"nbformat_minor":2,"cells":[{"cell_type":"markdown","source":["# [farmatown3]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']","object_type":"Database"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["USE [master]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']","object_type":"Database"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Database [farmatown3]    Script Date: 04/11/2022 18:03:05 ******/\r\nCREATE DATABASE [farmatown3]\r\n CONTAINMENT = NONE\r\n ON  PRIMARY \r\n( NAME = N'farmatown3', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL15.SQLEXPRESS\\MSSQL\\DATA\\farmatown3.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )\r\n LOG ON \r\n( NAME = N'farmatown3_log', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL15.SQLEXPRESS\\MSSQL\\DATA\\farmatown3_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )\r\n WITH CATALOG_COLLATION = DATABASE_DEFAULT\r\n","GO\r\n","ALTER DATABASE [farmatown3] SET COMPATIBILITY_LEVEL = 150\r\n","GO\r\n","IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))\r\nbegin\r\nEXEC [farmatown3].[dbo].[sp_fulltext_database] @action = 'enable'\r\nend\r\n","GO\r\n","ALTER DATABASE [farmatown3] SET ANSI_NULL_DEFAULT OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET ANSI_NULLS OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET ANSI_PADDING OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET ANSI_WARNINGS OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET ARITHABORT OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET AUTO_CLOSE ON \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET AUTO_SHRINK OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET AUTO_UPDATE_STATISTICS ON \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET CURSOR_CLOSE_ON_COMMIT OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET CURSOR_DEFAULT  GLOBAL \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET CONCAT_NULL_YIELDS_NULL OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET NUMERIC_ROUNDABORT OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET QUOTED_IDENTIFIER OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET RECURSIVE_TRIGGERS OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET  ENABLE_BROKER \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET AUTO_UPDATE_STATISTICS_ASYNC OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET DATE_CORRELATION_OPTIMIZATION OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET TRUSTWORTHY OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET ALLOW_SNAPSHOT_ISOLATION OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET PARAMETERIZATION SIMPLE \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET READ_COMMITTED_SNAPSHOT OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET HONOR_BROKER_PRIORITY OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET RECOVERY SIMPLE \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET  MULTI_USER \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET PAGE_VERIFY CHECKSUM  \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET DB_CHAINING OFF \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET TARGET_RECOVERY_TIME = 60 SECONDS \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET DELAYED_DURABILITY = DISABLED \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET ACCELERATED_DATABASE_RECOVERY = OFF  \r\n","GO\r\n","ALTER DATABASE [farmatown3] SET QUERY_STORE = OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']","object_type":"Database"}},{"cell_type":"markdown","source":["# [dbo].[facturas]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["USE [farmatown3]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[facturas]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[facturas](\r\n\t[idFactura] [int] IDENTITY(1,1) NOT NULL,\r\n\t[fecha] [date] NULL,\r\n\t[total] [decimal](10, 2) NULL,\r\n\t[tieneObraSocial] [bit] NULL,\r\n\t[dniCliente] [bigint] NULL,\r\n\t[idUsuario] [int] NULL,\r\n\t[tipoPago] [bit] NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[idFactura] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[facturasObraSocial]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/View[@Name='facturasObraSocial' and @Schema='dbo']","object_type":"View"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  View [dbo].[facturasObraSocial]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create view [dbo].[facturasObraSocial]\r\nas\r\nselect count(idFactura) Cantidad_Con_OS, (select count(idFactura) from facturas where tieneObraSocial = 0) as Cantidad_Sin_OS from facturas where tieneObraSocial = 1\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/View[@Name='facturasObraSocial' and @Schema='dbo']","object_type":"View"}},{"cell_type":"markdown","source":["# [dbo].[articulos]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[articulos]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[articulos](\r\n\t[idArticulo] [int] IDENTITY(1,1) NOT NULL,\r\n\t[nombre] [varchar](100) NULL,\r\n\t[stock] [int] NULL,\r\n\t[precioUnitario] [decimal](10, 2) NULL,\r\n\t[idTipoArticulo] [int] NULL,\r\n\t[id_droga] [int] NULL,\r\n\t[id_laboratorio] [int] NULL,\r\n\t[fecha_vto] [date] NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[idArticulo] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[clientes]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='clientes' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[clientes]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[clientes](\r\n\t[dni] [bigint] NOT NULL,\r\n\t[nombre] [varchar](20) NULL,\r\n\t[apellido] [varchar](20) NULL,\r\n\t[telefono] [bigint] NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[dni] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='clientes' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[detalle_lote]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detalle_lote' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[detalle_lote]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[detalle_lote](\r\n\t[id_detalle_lote] [int] IDENTITY(1,1) NOT NULL,\r\n\t[idArticulo] [int] NULL,\r\n\t[id_lote] [int] NULL,\r\n\t[cantidad_comprada] [int] NULL,\r\n\t[precio_compra] [decimal](10, 2) NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[id_detalle_lote] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detalle_lote' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[detallesFactura]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detallesFactura' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[detallesFactura]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[detallesFactura](\r\n\t[idDetalle] [int] IDENTITY(1,1) NOT NULL,\r\n\t[idFactura] [int] NULL,\r\n\t[idArticulo] [int] NULL,\r\n\t[descuento] [int] NULL,\r\n\t[montoDescontado] [decimal](10, 2) NULL,\r\n\t[subtotal] [decimal](10, 2) NULL,\r\n\t[cantidad] [int] NULL,\r\n\t[precio] [decimal](10, 2) NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[idDetalle] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detallesFactura' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[drogas]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='drogas' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[drogas]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[drogas](\r\n\t[id_droga] [int] IDENTITY(1,1) NOT NULL,\r\n\t[nombreDroga] [varchar](40) NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[id_droga] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='drogas' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[laboratorios]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='laboratorios' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[laboratorios]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[laboratorios](\r\n\t[id_laboratorio] [int] IDENTITY(1,1) NOT NULL,\r\n\t[nombreLab] [varchar](40) NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[id_laboratorio] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='laboratorios' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[lotes]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='lotes' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[lotes]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[lotes](\r\n\t[id_lote] [int] IDENTITY(1,1) NOT NULL,\r\n\t[fecha_lote] [date] NULL,\r\n\t[total] [decimal](10, 2) NULL,\r\n\t[id_proveedor] [int] NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[id_lote] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='lotes' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[proveedores]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='proveedores' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[proveedores]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[proveedores](\r\n\t[id_proveedor] [int] IDENTITY(1,1) NOT NULL,\r\n\t[nombre_proveedor] [varchar](40) NULL,\r\n\t[cuit] [bigint] NULL,\r\n\t[direccion] [varchar](25) NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[id_proveedor] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='proveedores' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[tarjetas]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tarjetas' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[tarjetas]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[tarjetas](\r\n\t[nro_tarjeta] [bigint] NOT NULL,\r\n\t[cod_seguridad] [int] NULL,\r\n\t[fecha_venc] [date] NULL,\r\n\t[dni] [bigint] NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[nro_tarjeta] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tarjetas' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[tipoArticulos]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoArticulos' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[tipoArticulos]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[tipoArticulos](\r\n\t[idTipoArticulo] [int] IDENTITY(1,1) NOT NULL,\r\n\t[descripcion] [varchar](20) NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[idTipoArticulo] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoArticulos' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[tipoPago]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoPago' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[tipoPago]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[tipoPago](\r\n\t[tipoPago] [bit] NOT NULL,\r\n\t[descripcion] [varchar](25) NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[tipoPago] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoPago' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[tipoUsuarios]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoUsuarios' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[tipoUsuarios]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[tipoUsuarios](\r\n\t[idTipoUsuario] [int] NOT NULL,\r\n\t[descripcion] [varchar](15) NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[idTipoUsuario] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoUsuarios' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[usuarios]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='usuarios' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  Table [dbo].[usuarios]    Script Date: 04/11/2022 18:03:05 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE TABLE [dbo].[usuarios](\r\n\t[idUsuario] [int] IDENTITY(1,1) NOT NULL,\r\n\t[usuario] [varchar](15) NULL,\r\n\t[pwd] [varchar](15) NULL,\r\n\t[nombre] [varchar](20) NULL,\r\n\t[apellido] [varchar](20) NULL,\r\n\t[idTipoUsuario] [int] NULL,\r\nPRIMARY KEY CLUSTERED \r\n(\r\n\t[idUsuario] ASC\r\n)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]\r\n) ON [PRIMARY]\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='usuarios' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[articulos]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[articulos] ON \r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (1, N'ibuprofeno 600mg 20 comp', 102, CAST(400.00 AS Decimal(10, 2)), 1, 4, 1, CAST(N'2022-12-02' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (2, N'ibuprofeno 400mg 20 comp', 100, CAST(300.00 AS Decimal(10, 2)), 1, 4, 1, CAST(N'2022-12-02' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (3, N'ibuprofeno 600mg 30 ', 100, CAST(550.00 AS Decimal(10, 2)), 1, 4, 1, CAST(N'2022-12-02' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (4, N'ibuevanol 20 caps', 101, CAST(350.00 AS Decimal(10, 2)), 1, 1, 1, CAST(N'2022-12-02' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (5, N'ibuevanol plus 20 caps', 101, CAST(450.00 AS Decimal(10, 2)), 1, 4, 3, CAST(N'2022-12-02' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (6, N'ibuevanol forte 10 caps', 100, CAST(500.00 AS Decimal(10, 2)), 1, 4, 3, CAST(N'2022-12-02' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (7, N'bayaspirina 650mg 20 comp', 100, CAST(400.00 AS Decimal(10, 2)), 1, 2, 2, CAST(N'2022-12-02' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (8, N'ibuevanol forte 10 comp', 100, CAST(450.00 AS Decimal(10, 2)), 1, 2, 2, CAST(N'2022-12-02' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (9, N'aspirina 500mg 20 comp', 103, CAST(450.00 AS Decimal(10, 2)), 1, 2, 2, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (10, N'aspirina 400mg 40 comp', 100, CAST(700.00 AS Decimal(10, 2)), 1, 2, 2, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (11, N'elissan 2mg 20 comp', 50, CAST(300.00 AS Decimal(10, 2)), 1, 1, 5, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (12, N'elissan 2mg 10 comp', 50, CAST(250.00 AS Decimal(10, 2)), 1, 1, 5, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (13, N'mentholatum 85g', 20, CAST(600.00 AS Decimal(10, 2)), 1, 5, 2, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (14, N'aziatop 20mg 14 caps', 80, CAST(500.00 AS Decimal(10, 2)), 1, 3, 4, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (15, N'omeprazol 20mg 14 caps', 80, CAST(550.00 AS Decimal(10, 2)), 1, 3, 4, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (16, N'acetaminofen 500mg 20 comp', 80, CAST(400.00 AS Decimal(10, 2)), 1, 9, 5, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (17, N'tylenol 500mg 20 comp', 80, CAST(420.00 AS Decimal(10, 2)), 1, 9, 5, CAST(N'2022-12-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (18, N'panadol 500mg 16 comp', 80, CAST(480.00 AS Decimal(10, 2)), 1, 9, 5, CAST(N'2022-12-29' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (19, N'loperamida 2mg 6 comp', 40, CAST(200.00 AS Decimal(10, 2)), 1, 1, 3, CAST(N'2022-12-29' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (20, N'fortasec flas 2mg 500 20 comp', 80, CAST(400.00 AS Decimal(10, 2)), 1, 1, 5, CAST(N'2022-12-29' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (21, N'bialcohol 1000ml', 20, CAST(900.00 AS Decimal(10, 2)), 5, 6, 6, CAST(N'2022-12-29' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (22, N'bialcohol 250ml', 20, CAST(400.00 AS Decimal(10, 2)), 5, 6, 6, CAST(N'2022-12-29' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (23, N'sanicol 500ml', 20, CAST(900.00 AS Decimal(10, 2)), 5, 6, 4, CAST(N'2022-12-29' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (24, N'toy boy 50ml', 5, CAST(2000.00 AS Decimal(10, 2)), 2, 7, 7, CAST(N'2022-12-29' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (25, N'Ebano Salvia 100ml', 5, CAST(2500.00 AS Decimal(10, 2)), 2, 7, 7, CAST(N'2022-12-29' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (26, N'loewe 100ml', 5, CAST(4000.00 AS Decimal(10, 2)), 2, 7, 7, CAST(N'2023-01-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (27, N'bagovit A 50g', 30, CAST(800.00 AS Decimal(10, 2)), 3, 8, 2, CAST(N'2023-01-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (28, N'loreal 100g', 27, CAST(700.00 AS Decimal(10, 2)), 3, 8, 2, CAST(N'2023-01-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (29, N'dermaglos 50g', 25, CAST(900.00 AS Decimal(10, 2)), 3, 8, 2, CAST(N'2023-01-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (30, N'neutrogena 75g', 25, CAST(800.00 AS Decimal(10, 2)), 3, 8, 3, CAST(N'2023-01-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (31, N'pañuelos elite', 200, CAST(150.00 AS Decimal(10, 2)), 4, 8, 5, CAST(N'2023-01-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (32, N'barbijo descartable', 400, CAST(50.00 AS Decimal(10, 2)), 4, 8, 5, CAST(N'2023-01-15' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (33, N'pañuelos achiss', 200, CAST(145.00 AS Decimal(10, 2)), 4, 8, 5, CAST(N'2023-02-03' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (34, N'pañales comodin 10u', 150, CAST(1800.00 AS Decimal(10, 2)), 4, 8, 5, CAST(N'2023-02-03' AS Date))\r\n","INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (35, N'estrella hisopo 125u', 40, CAST(200.00 AS Decimal(10, 2)), 4, 8, 4, CAST(N'2023-02-03' AS Date))\r\n","SET IDENTITY_INSERT [dbo].[articulos] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[clientes]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='clientes' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (1212, N'prueba', N'prue', 531255)\r\n","INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (11111, N'gas', N'gas', 435543)\r\n","INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (123123, N'fran', N'Valenzuela', 545454)\r\n","INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (13456789, N'rocco', N'hola', 132341)\r\n","INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (24578124, N'Diego', N'Ferreyra', 4578745)\r\n","INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (24875478, N'Juan', N'Perez', 4571545)\r\n","INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (25547845, N'Flor', N'Perezz', 4578460)\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='clientes' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[detalle_lote]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detalle_lote' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[detalle_lote] ON \r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (1, 1, 1, 102, CAST(240.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (2, 2, 1, 100, CAST(180.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (3, 3, 1, 100, CAST(320.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (4, 4, 1, 101, CAST(230.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (5, 5, 1, 101, CAST(230.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (6, 6, 2, 100, CAST(340.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (8, 8, 2, 100, CAST(240.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (9, 9, 2, 103, CAST(235.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (10, 10, 2, 100, CAST(500.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (11, 11, 2, 50, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (12, 12, 3, 50, CAST(160.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (13, 13, 3, 20, CAST(400.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (14, 14, 3, 80, CAST(350.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (15, 15, 3, 80, CAST(380.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (16, 16, 3, 80, CAST(260.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (17, 17, 3, 80, CAST(300.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (18, 18, 4, 80, CAST(330.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (19, 19, 4, 40, CAST(130.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (20, 20, 4, 80, CAST(300.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (21, 21, 4, 20, CAST(630.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (22, 22, 4, 20, CAST(290.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (23, 23, 4, 20, CAST(650.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (24, 24, 5, 5, CAST(1450.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (25, 25, 5, 5, CAST(1850.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (26, 26, 5, 5, CAST(3000.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (27, 27, 5, 30, CAST(550.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (28, 28, 5, 27, CAST(480.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (29, 29, 5, 25, CAST(630.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (30, 30, 6, 25, CAST(600.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (31, 31, 6, 200, CAST(180.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (32, 32, 6, 400, CAST(35.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (33, 33, 6, 200, CAST(90.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (34, 34, 6, 150, CAST(1400.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (35, 35, 6, 40, CAST(145.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (38, 1, 8, 2, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (39, 1, 8, 2, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (40, 2, 8, 1, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (41, 3, 9, 2, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (42, 3, 9, 2, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (43, 1, 15, 5, CAST(100.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (45, 5, 17, 2, CAST(450.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (46, 7, 18, 5, CAST(400.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (47, 4, 18, 3, CAST(350.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (48, 10, 18, 3, CAST(700.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (49, 2, 19, 3, CAST(300.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (50, 5, 19, 3, CAST(450.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (51, 3, 22, 2, CAST(550.00 AS Decimal(10, 2)))\r\n","SET IDENTITY_INSERT [dbo].[detalle_lote] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detalle_lote' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[detallesFactura]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detallesFactura' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[detallesFactura] ON \r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (16, 6, 3, 15, CAST(555.00 AS Decimal(10, 2)), CAST(3145.00 AS Decimal(10, 2)), 1, CAST(3700.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (22, 13, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(600.00 AS Decimal(10, 2)), 3, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (23, 14, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(1000.00 AS Decimal(10, 2)), 5, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (24, 15, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(200.00 AS Decimal(10, 2)), 1, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (25, 16, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(400.00 AS Decimal(10, 2)), 2, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (26, 17, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(400.00 AS Decimal(10, 2)), 2, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (27, 18, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(400.00 AS Decimal(10, 2)), 2, CAST(200.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (29, 20, 3, 0, CAST(0.00 AS Decimal(10, 2)), CAST(3700.00 AS Decimal(10, 2)), 1, CAST(3700.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (30, 21, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(400.00 AS Decimal(10, 2)), 1, CAST(400.00 AS Decimal(10, 2)))\r\n","INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (31, 21, 28, 0, CAST(0.00 AS Decimal(10, 2)), CAST(2100.00 AS Decimal(10, 2)), 3, CAST(700.00 AS Decimal(10, 2)))\r\n","SET IDENTITY_INSERT [dbo].[detallesFactura] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detallesFactura' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[drogas]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='drogas' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[drogas] ON \r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (1, N'Loperamida')\r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (2, N'Aspirina')\r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (3, N'Omeprazol')\r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (4, N'Ibuprofeno')\r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (5, N'Alcanfor')\r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (6, N'Alcohol')\r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (7, N'Aceite esencial')\r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (8, N'Ninguna')\r\n","INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (9, N'Acetaminofen')\r\n","SET IDENTITY_INSERT [dbo].[drogas] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='drogas' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[facturas]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[facturas] ON \r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (6, CAST(N'2022-09-30' AS Date), CAST(3505.00 AS Decimal(10, 2)), 1, 13456789, 3, 0)\r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (13, CAST(N'2022-10-07' AS Date), CAST(600.00 AS Decimal(10, 2)), 0, 123123, 1, NULL)\r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (14, CAST(N'2022-10-07' AS Date), CAST(1000.00 AS Decimal(10, 2)), 0, 25547845, 1, NULL)\r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (15, CAST(N'2022-10-07' AS Date), CAST(200.00 AS Decimal(10, 2)), 0, 24578124, 1, NULL)\r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (16, CAST(N'2022-10-07' AS Date), CAST(400.00 AS Decimal(10, 2)), 0, 123123, 1, NULL)\r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (17, CAST(N'2022-10-07' AS Date), CAST(400.00 AS Decimal(10, 2)), 0, 123123, 1, NULL)\r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (18, CAST(N'2022-10-07' AS Date), CAST(400.00 AS Decimal(10, 2)), 0, 123123, 1, 1)\r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (20, CAST(N'2022-10-10' AS Date), CAST(3700.00 AS Decimal(10, 2)), 0, 13456789, 3, 0)\r\n","INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (21, CAST(N'2022-11-02' AS Date), CAST(2500.00 AS Decimal(10, 2)), 1, 11111, 3, 0)\r\n","SET IDENTITY_INSERT [dbo].[facturas] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[laboratorios]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='laboratorios' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[laboratorios] ON \r\n","INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (1, N'Drogueria Argentina S.A.')\r\n","INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (2, N'Química Luar')\r\n","INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (3, N'Lazar')\r\n","INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (4, N'Tablada SRL')\r\n","INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (5, N'Norton SRL')\r\n","INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (6, N'Porta')\r\n","INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (7, N'Distribuidor de Perfumes')\r\n","SET IDENTITY_INSERT [dbo].[laboratorios] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='laboratorios' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[lotes]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='lotes' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[lotes] ON \r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (1, CAST(N'2022-10-28' AS Date), CAST(120940.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (2, CAST(N'2022-10-25' AS Date), CAST(168205.00 AS Decimal(10, 2)), 2)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (3, CAST(N'2022-10-22' AS Date), CAST(88800.00 AS Decimal(10, 2)), 3)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (4, CAST(N'2022-10-26' AS Date), CAST(87000.00 AS Decimal(10, 2)), 2)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (5, CAST(N'2022-10-28' AS Date), CAST(76710.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (6, CAST(N'2022-10-26' AS Date), CAST(298800.00 AS Decimal(10, 2)), 4)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (8, CAST(N'2022-10-29' AS Date), CAST(1000.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (9, CAST(N'2022-10-29' AS Date), CAST(15000.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (10, CAST(N'2022-10-29' AS Date), CAST(16000.00 AS Decimal(10, 2)), 2)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (11, CAST(N'2022-10-29' AS Date), CAST(20000.00 AS Decimal(10, 2)), 4)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (13, CAST(N'2022-11-01' AS Date), CAST(100.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (14, CAST(N'2022-10-02' AS Date), CAST(1650.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (15, CAST(N'2022-10-02' AS Date), CAST(1100.00 AS Decimal(10, 2)), 2)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (16, CAST(N'2022-10-02' AS Date), CAST(1100.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (17, CAST(N'2022-10-02' AS Date), CAST(900.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (18, CAST(N'2022-10-02' AS Date), CAST(5150.00 AS Decimal(10, 2)), 2)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (19, CAST(N'2022-10-02' AS Date), CAST(2250.00 AS Decimal(10, 2)), 1)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (20, CAST(N'2022-10-02' AS Date), CAST(1500.00 AS Decimal(10, 2)), 2)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (21, CAST(N'2022-10-02' AS Date), CAST(2600.00 AS Decimal(10, 2)), 2)\r\n","INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (22, CAST(N'2022-10-02' AS Date), CAST(1100.00 AS Decimal(10, 2)), 1)\r\n","SET IDENTITY_INSERT [dbo].[lotes] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='lotes' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[proveedores]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='proveedores' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[proveedores] ON \r\n","INSERT [dbo].[proveedores] ([id_proveedor], [nombre_proveedor], [cuit], [direccion]) VALUES (1, N'Drogueria MG S.R.L', 30500006613, N'malaga 1610')\r\n","INSERT [dbo].[proveedores] ([id_proveedor], [nombre_proveedor], [cuit], [direccion]) VALUES (2, N'Drogueria Capdevilla S.R.L', 30663205621, N'francisco suarez 2760')\r\n","INSERT [dbo].[proveedores] ([id_proveedor], [nombre_proveedor], [cuit], [direccion]) VALUES (3, N'Drogueria Decade', 30500057102, N'fragueiro 474')\r\n","INSERT [dbo].[proveedores] ([id_proveedor], [nombre_proveedor], [cuit], [direccion]) VALUES (4, N'P&G', 30604958640, N'roberto cayol 3799')\r\n","SET IDENTITY_INSERT [dbo].[proveedores] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='proveedores' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[tarjetas]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tarjetas' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["INSERT [dbo].[tarjetas] ([nro_tarjeta], [cod_seguridad], [fecha_venc], [dni]) VALUES (10101010, 123, CAST(N'2026-10-10' AS Date), 1212)\r\n","INSERT [dbo].[tarjetas] ([nro_tarjeta], [cod_seguridad], [fecha_venc], [dni]) VALUES (125478458, 154, CAST(N'2022-10-30' AS Date), 25547845)\r\n","INSERT [dbo].[tarjetas] ([nro_tarjeta], [cod_seguridad], [fecha_venc], [dni]) VALUES (1122334455667788, 12, CAST(N'2022-10-07' AS Date), 123123)\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tarjetas' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[tipoArticulos]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoArticulos' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[tipoArticulos] ON \r\n","INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (1, N'Medicamento')\r\n","INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (2, N'Perfumeria')\r\n","INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (3, N'Cosmetico')\r\n","INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (4, N'Descartable')\r\n","INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (5, N'Desinfectante')\r\n","SET IDENTITY_INSERT [dbo].[tipoArticulos] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoArticulos' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[tipoPago]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoPago' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["INSERT [dbo].[tipoPago] ([tipoPago], [descripcion]) VALUES (0, N'efectivo')\r\n","INSERT [dbo].[tipoPago] ([tipoPago], [descripcion]) VALUES (1, N'tarjeta')\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoPago' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[tipoUsuarios]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoUsuarios' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["INSERT [dbo].[tipoUsuarios] ([idTipoUsuario], [descripcion]) VALUES (1, N'admin')\r\n","INSERT [dbo].[tipoUsuarios] ([idTipoUsuario], [descripcion]) VALUES (2, N'vendedor')\r\n","INSERT [dbo].[tipoUsuarios] ([idTipoUsuario], [descripcion]) VALUES (3, N'gerente')\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tipoUsuarios' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [dbo].[usuarios]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='usuarios' and @Schema='dbo']","object_type":"Table"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["SET IDENTITY_INSERT [dbo].[usuarios] ON \r\n","INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (1, N'fran', N'1234', N'Francisco', N'Valenzuela', 2)\r\n","INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (2, N'roco', N'1234', N'Matias', N'Etcetera', 2)\r\n","INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (3, N'gaston', N'12345', N'Gaston', N'Guiñazu', 1)\r\n","INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (4, N'noe', N'123', N'Noelia', N'Gonzales', 3)\r\n","INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (5, N'Noe', N'katy', N'Noelia', N'Tulian', 2)\r\n","SET IDENTITY_INSERT [dbo].[usuarios] OFF\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='usuarios' and @Schema='dbo']","object_type":"Table"}},{"cell_type":"markdown","source":["# [FK__articulos__idTip__5070F446]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']/ForeignKey[@Name='FK__articulos__idTip__5070F446']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[articulos]  WITH CHECK ADD FOREIGN KEY([idTipoArticulo])\r\nREFERENCES [dbo].[tipoArticulos] ([idTipoArticulo])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']/ForeignKey[@Name='FK__articulos__idTip__5070F446']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [fk_droga]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']/ForeignKey[@Name='fk_droga']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[articulos]  WITH CHECK ADD  CONSTRAINT [fk_droga] FOREIGN KEY([id_droga])\r\nREFERENCES [dbo].[drogas] ([id_droga])\r\n","GO\r\n","ALTER TABLE [dbo].[articulos] CHECK CONSTRAINT [fk_droga]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']/ForeignKey[@Name='fk_droga']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [fk_laboratorio]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']/ForeignKey[@Name='fk_laboratorio']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[articulos]  WITH CHECK ADD  CONSTRAINT [fk_laboratorio] FOREIGN KEY([id_laboratorio])\r\nREFERENCES [dbo].[laboratorios] ([id_laboratorio])\r\n","GO\r\n","ALTER TABLE [dbo].[articulos] CHECK CONSTRAINT [fk_laboratorio]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='articulos' and @Schema='dbo']/ForeignKey[@Name='fk_laboratorio']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__detalle_l__id_lo__534D60F1]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detalle_lote' and @Schema='dbo']/ForeignKey[@Name='FK__detalle_l__id_lo__534D60F1']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[detalle_lote]  WITH CHECK ADD FOREIGN KEY([id_lote])\r\nREFERENCES [dbo].[lotes] ([id_lote])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detalle_lote' and @Schema='dbo']/ForeignKey[@Name='FK__detalle_l__id_lo__534D60F1']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__detalle_l__idArt__5441852A]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detalle_lote' and @Schema='dbo']/ForeignKey[@Name='FK__detalle_l__idArt__5441852A']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[detalle_lote]  WITH CHECK ADD FOREIGN KEY([idArticulo])\r\nREFERENCES [dbo].[articulos] ([idArticulo])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detalle_lote' and @Schema='dbo']/ForeignKey[@Name='FK__detalle_l__idArt__5441852A']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__detallesF__idArt__5535A963]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detallesFactura' and @Schema='dbo']/ForeignKey[@Name='FK__detallesF__idArt__5535A963']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[detallesFactura]  WITH CHECK ADD FOREIGN KEY([idArticulo])\r\nREFERENCES [dbo].[articulos] ([idArticulo])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detallesFactura' and @Schema='dbo']/ForeignKey[@Name='FK__detallesF__idArt__5535A963']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__detallesF__idFac__5629CD9C]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detallesFactura' and @Schema='dbo']/ForeignKey[@Name='FK__detallesF__idFac__5629CD9C']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[detallesFactura]  WITH CHECK ADD FOREIGN KEY([idFactura])\r\nREFERENCES [dbo].[facturas] ([idFactura])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='detallesFactura' and @Schema='dbo']/ForeignKey[@Name='FK__detallesF__idFac__5629CD9C']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__facturas__dniCli__571DF1D5]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']/ForeignKey[@Name='FK__facturas__dniCli__571DF1D5']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[facturas]  WITH CHECK ADD FOREIGN KEY([dniCliente])\r\nREFERENCES [dbo].[clientes] ([dni])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']/ForeignKey[@Name='FK__facturas__dniCli__571DF1D5']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__facturas__idUsua__5812160E]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']/ForeignKey[@Name='FK__facturas__idUsua__5812160E']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[facturas]  WITH CHECK ADD FOREIGN KEY([idUsuario])\r\nREFERENCES [dbo].[usuarios] ([idUsuario])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']/ForeignKey[@Name='FK__facturas__idUsua__5812160E']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__facturas__tipoPa__59063A47]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']/ForeignKey[@Name='FK__facturas__tipoPa__59063A47']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[facturas]  WITH CHECK ADD FOREIGN KEY([tipoPago])\r\nREFERENCES [dbo].[tipoPago] ([tipoPago])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='facturas' and @Schema='dbo']/ForeignKey[@Name='FK__facturas__tipoPa__59063A47']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__lotes__id_provee__59FA5E80]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='lotes' and @Schema='dbo']/ForeignKey[@Name='FK__lotes__id_provee__59FA5E80']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[lotes]  WITH CHECK ADD FOREIGN KEY([id_proveedor])\r\nREFERENCES [dbo].[proveedores] ([id_proveedor])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='lotes' and @Schema='dbo']/ForeignKey[@Name='FK__lotes__id_provee__59FA5E80']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__tarjetas__dni__5AEE82B9]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tarjetas' and @Schema='dbo']/ForeignKey[@Name='FK__tarjetas__dni__5AEE82B9']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[tarjetas]  WITH CHECK ADD FOREIGN KEY([dni])\r\nREFERENCES [dbo].[clientes] ([dni])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='tarjetas' and @Schema='dbo']/ForeignKey[@Name='FK__tarjetas__dni__5AEE82B9']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [FK__usuarios__idTipo__5BE2A6F2]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='usuarios' and @Schema='dbo']/ForeignKey[@Name='FK__usuarios__idTipo__5BE2A6F2']","object_type":"ForeignKey"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER TABLE [dbo].[usuarios]  WITH CHECK ADD FOREIGN KEY([idTipoUsuario])\r\nREFERENCES [dbo].[tipoUsuarios] ([idTipoUsuario])\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/Table[@Name='usuarios' and @Schema='dbo']/ForeignKey[@Name='FK__usuarios__idTipo__5BE2A6F2']","object_type":"ForeignKey"}},{"cell_type":"markdown","source":["# [dbo].[sp_articulosVendidos]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='sp_articulosVendidos' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[sp_articulosVendidos]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[sp_articulosVendidos]\r\n@mes int\r\nas\r\nbegin\r\nselect top 10 a.nombre as Articulo , sum(cantidad) as Cantidad_vendida, month(f2.fecha) as Mes,year(f2.fecha) as Año\r\nfrom detallesFactura f join articulos a on a.idArticulo=f.idArticulo join\r\nfacturas f2 on f2.idFactura=f.idFactura\r\nwhere month(f2.fecha)=@mes\r\ngroup by month(f2.fecha),year(f2.fecha),a.nombre\r\norder by Cantidad_vendida desc\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='sp_articulosVendidos' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[sp_clientesFrecuentes]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='sp_clientesFrecuentes' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[sp_clientesFrecuentes]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE procedure [dbo].[sp_clientesFrecuentes]\r\n as\r\nselect top 3 c.nombre+' '+c.apellido AS Nombre, count(dniCliente) as Compras_totales \r\nfrom clientes c, facturas f where c.dni = f.dniCliente group by c.nombre, c.apellido order by count(dniCliente) desc\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='sp_clientesFrecuentes' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_COMBO_BOX' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX]\r\nAS\r\nBEGIN\r\n\t\tSELECT idArticulo, nombre +' | $' + convert(varchar(100), precioUnitario) as Articulo, tp.idTipoArticulo, descripcion,d.id_droga, nombreDroga, l.id_laboratorio, nombreLab,\r\n\ta.precioUnitario\r\n\tfrom articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo\r\n\tJOIN laboratorios l ON a.id_laboratorio = l.id_laboratorio\r\n\tJOIN drogas d ON a.id_droga= d.id_droga;\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_COMBO_BOX' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX_FILTRO]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_COMBO_BOX_FILTRO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX_FILTRO]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX_FILTRO]\r\n@filtro varchar(20)\r\nAS\r\nBEGIN\r\n\t\r\n\tSELECT idArticulo, nombre, a.idTipoArticulo,descripcion,precioUnitario \r\n\tfrom articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo\r\n\twhere nombre like @filtro+'%';\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_COMBO_BOX_FILTRO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_ARTICULOS_GRILLA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_GRILLA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_GRILLA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_GRILLA]\r\nAS\r\nBEGIN\r\n\t\r\n\tSELECT idArticulo, nombre, tp.idTipoArticulo, descripcion,d.id_droga, nombreDroga, l.id_laboratorio, nombreLab,\r\n\ta.precioUnitario,stock\r\n\tfrom articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo\r\n\tJOIN laboratorios l ON a.id_laboratorio = l.id_laboratorio\r\n\tJOIN drogas d ON a.id_droga= d.id_droga;\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_GRILLA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_ARTICULOS_POR_DROGA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_POR_DROGA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_POR_DROGA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_POR_DROGA]\r\n@droga nvarchar(100)\r\nAS\r\nBEGIN\r\n\t\r\n\tSELECT idArticulo, nombre, tp.idTipoArticulo, descripcion,d.id_droga, nombreDroga, l.id_laboratorio, nombreLab,\r\n\ta.precioUnitario,stock\r\n\tfrom articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo\r\n\tJOIN laboratorios l ON a.id_laboratorio = l.id_laboratorio\r\n\tJOIN drogas d ON a.id_droga= d.id_droga\r\n\twhere nombreDroga like '%'+@droga+'%'\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_POR_DROGA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_ARTICULOS_POR_NOMBRE]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_POR_NOMBRE' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_POR_NOMBRE]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_POR_NOMBRE]\r\n@nombre nvarchar(100)\r\nAS\r\nBEGIN\r\n\t\r\n\tSELECT idArticulo, nombre, tp.idTipoArticulo, descripcion,d.id_droga, nombreDroga, l.id_laboratorio, nombreLab,\r\n\ta.precioUnitario,stock\r\n\tfrom articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo\r\n\tJOIN laboratorios l ON a.id_laboratorio = l.id_laboratorio\r\n\tJOIN drogas d ON a.id_droga= d.id_droga\r\n\twhere nombre like '%'+@nombre+'%'\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_ARTICULOS_POR_NOMBRE' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_CLIENTES]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_CLIENTES' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_CLIENTES]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create PROCEDURE [dbo].[SP_CONSULTAR_CLIENTES]\r\nAS\r\nBEGIN\r\n\t\r\n\tselect nombre,apellido,dni,telefono from clientes\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_CLIENTES' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_CLIENTES_CON_TARJETA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_CLIENTES_CON_TARJETA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_CLIENTES_CON_TARJETA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_CLIENTES_CON_TARJETA]\r\nAS\r\nBEGIN\t\r\nselect nombre,apellido,c.dni,telefono, nro_tarjeta,cod_seguridad, fecha_venc from clientes c LEFT JOIN tarjetas t ON c.dni = t.dni\r\nEND\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_CLIENTES_CON_TARJETA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_CLIENTES_POR_DNI]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_CLIENTES_POR_DNI' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_CLIENTES_POR_DNI]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_CLIENTES_POR_DNI]\r\n@DNI bigint\r\nAS\r\nBEGIN\r\n\t\r\n\tselect nombre,apellido,dni,telefono from clientes\r\n\twhere dni = @DNI\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_CLIENTES_POR_DNI' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_DETALLES_POR_ID_FACTURA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_DETALLES_POR_ID_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_DETALLES_POR_ID_FACTURA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","\r\nCREATE procedure [dbo].[SP_CONSULTAR_DETALLES_POR_ID_FACTURA]\r\n@idFactura int\r\nas\r\nbegin\r\nselect idDetalle, a.nombre, cantidad,df.precio,montoDescontado,subtotal \r\nfrom detallesFactura df \r\njoin articulos a on df.idArticulo=a.idArticulo\r\nwhere idFactura=@idFactura \r\nend\r\n\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_DETALLES_POR_ID_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_DROGAS_COMBO_BOX_ARTICULOS]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_DROGAS_COMBO_BOX_ARTICULOS' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_DROGAS_COMBO_BOX_ARTICULOS]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_DROGAS_COMBO_BOX_ARTICULOS]\r\nAS\r\nBEGIN\t\r\n\tSELECT * FROM drogas;\r\nEND\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_DROGAS_COMBO_BOX_ARTICULOS' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_FACTURA_POR_FECHA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_FACTURA_POR_FECHA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_FACTURA_POR_FECHA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[SP_CONSULTAR_FACTURA_POR_FECHA]\r\n@fechaDesde datetime,\r\n@fechaHasta datetime\r\nas\r\nbegin\r\nSELECT idFactura, c.apellido + ' ' +c.nombre 'Cliente', fecha, total \r\nfrom facturas f join clientes c on f.dniCliente=c.dni\r\nwhere f.fecha between @fechaDesde and @fechaHasta\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_FACTURA_POR_FECHA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_FACTURAS]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_FACTURAS' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_FACTURAS]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_FACTURAS]\r\nAS\r\nBEGIN\r\n\tSELECT idFactura, c.apellido + ' ' +c.nombre 'Nombre', fecha, total, p.descripcion\r\n\tfrom facturas f join clientes c on f.dniCliente=c.dni join tipoPago p on p.tipoPago=f.tipoPago\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_FACTURAS' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_LABORATORIOS_COMBO_BOX_ARTICULOS]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_LABORATORIOS_COMBO_BOX_ARTICULOS' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_LABORATORIOS_COMBO_BOX_ARTICULOS]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_CONSULTAR_LABORATORIOS_COMBO_BOX_ARTICULOS]\r\nAS\r\nBEGIN\t\r\n\tSELECT * FROM laboratorios;\r\nEND\t\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_LABORATORIOS_COMBO_BOX_ARTICULOS' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_STOCK]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_STOCK' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_STOCK]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE procedure [dbo].[SP_CONSULTAR_STOCK]\r\n@idArticulo int,\r\n@stock int OUTPUT\r\nas\r\nbegin\r\nset @stock = (select stock from articulos where idArticulo=@idArticulo)\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_STOCK' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_TIPO_ARTICULOS_COMBO_BOX]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_TIPO_ARTICULOS_COMBO_BOX' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_TIPO_ARTICULOS_COMBO_BOX]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[SP_CONSULTAR_TIPO_ARTICULOS_COMBO_BOX]\r\nas\r\nbegin\r\n\tselect * from tipoArticulos\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_TIPO_ARTICULOS_COMBO_BOX' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_TIPOS_USUARIO_COMBO_BOX]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_TIPOS_USUARIO_COMBO_BOX' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_TIPOS_USUARIO_COMBO_BOX]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create PROCEDURE [dbo].[SP_CONSULTAR_TIPOS_USUARIO_COMBO_BOX]\r\nAS\r\nBEGIN\r\n\tselect * from  tipoUsuarios \r\nEND\t \r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_TIPOS_USUARIO_COMBO_BOX' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CONSULTAR_USUARIOS_GRILLA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_USUARIOS_GRILLA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_USUARIOS_GRILLA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[SP_CONSULTAR_USUARIOS_GRILLA]\r\nas\r\nbegin\r\nselect idUsuario,nombre,apellido,tu.descripcion \r\nfrom usuarios u join tipoUsuarios tu on u.idTipoUsuario=tu.idTipoUsuario\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CONSULTAR_USUARIOS_GRILLA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_CREAR_USUARIO]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CREAR_USUARIO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_CREAR_USUARIO]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[SP_CREAR_USUARIO]\r\n@nombreReal nvarchar(20),\r\n@apellido nvarchar(20),\r\n@username nvarchar(20),\r\n@password nvarchar(20),\r\n@tipoUsuario int\r\nas\r\nbegin\r\ninsert into usuarios(usuario,pwd,nombre,apellido,idTipoUsuario)\r\nvalues(@username,@password,@nombreReal,@apellido,@tipoUsuario)\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_CREAR_USUARIO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_ELIMINAR_DETALLE]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_ELIMINAR_DETALLE' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_ELIMINAR_DETALLE]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[SP_ELIMINAR_DETALLE]\r\n@idDetalle int\r\nas\r\nbegin\r\ndelete from detallesFactura \r\nwhere idDetalle=@idDetalle\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_ELIMINAR_DETALLE' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_ELIMINAR_DETALLES]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_ELIMINAR_DETALLES' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_ELIMINAR_DETALLES]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[SP_ELIMINAR_DETALLES]\r\n@idDetalle int\r\nas\r\nbegin\r\ndelete from detallesFactura\r\nwhere idDetalle=@idDetalle\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_ELIMINAR_DETALLES' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_ELIMINAR_FACTURA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_ELIMINAR_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_ELIMINAR_FACTURA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure[dbo].[SP_ELIMINAR_FACTURA]\r\n@idFactura int\r\nas\r\nbegin\r\ndelete from detallesFactura\r\nwhere idFactura=@idFactura\r\n\r\ndelete from facturas\r\nwhere idFactura=@idFactura\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_ELIMINAR_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_INSERTAR_ARTICULO]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_ARTICULO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_ARTICULO]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[SP_INSERTAR_ARTICULO]\r\n@nombreArticulo varchar(20),\r\n@stock int,\r\n@precio decimal(10,2),\r\n@tipoArticulo int\r\nas\r\nbegin\r\ninsert into articulos(nombre,stock,precioUnitario,idTipoArticulo)\r\nvalues (@nombreArticulo,@stock,@precio,@tipoArticulo)\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_ARTICULO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_INSERTAR_CLIENTE]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_CLIENTE' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_CLIENTE]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create procedure [dbo].[SP_INSERTAR_CLIENTE]\r\n@DNI bigint,\r\n@nom_cliente nvarchar(20),\r\n@ape_cliente nvarchar(20),\r\n@telefono bigint\r\nas\r\nbegin\r\ninsert into CLIENTES(DNI,nombre,apellido,telefono)\r\nvalues (@DNI,@nom_cliente,@ape_cliente,@telefono)\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_CLIENTE' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_INSERTAR_DETALLE_FACTURA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_DETALLE_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_DETALLE_FACTURA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create PROCEDURE [dbo].[SP_INSERTAR_DETALLE_FACTURA] \r\n\t@idFactura int,\r\n\t@idArticulo int,\r\n\t@cantidad int,\r\n\t@descuento int,\r\n\t@montoDescontado decimal(10,2),\r\n\t@subtotal decimal(10,2),\r\n\t@precio decimal(10,2)\r\nAS\r\nBEGIN\r\n\tINSERT INTO detallesFactura(idFactura, idArticulo, cantidad, descuento, montoDescontado, subtotal,precio)\r\n    VALUES (@idFactura, @idArticulo, @cantidad, @descuento, @montoDescontado, @subtotal,@precio);\r\n  \r\nEND\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_DETALLE_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_INSERTAR_MAESTRO_FACTURA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_MAESTRO_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_MAESTRO_FACTURA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE PROCEDURE [dbo].[SP_INSERTAR_MAESTRO_FACTURA] \r\n\t@total money,\r\n\t@tieneObraSocial bit,\r\n\t@dniCliente bigint,\r\n\t@idUsuario int,\r\n\t@tipoPago bit,\r\n    @idFactura int output\r\n\t\r\nAS\r\nBEGIN\r\n\tINSERT INTO FACTURAS(fecha, total, tieneObraSocial, dniCliente,idUsuario, tipoPago)\r\n    VALUES (GETDATE(), @total, @tieneObraSocial, @dniCliente, @idUsuario, @tipoPago);\t\r\n    set @idFactura = SCOPE_IDENTITY();\r\nEND\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_MAESTRO_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_INSERTAR_TARJETA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_TARJETA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_TARJETA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE procedure [dbo].[SP_INSERTAR_TARJETA]\r\n@nro_tarjeta bigint,\r\n@cod_seguridad int,\r\n@fecha_venc date,\r\n@dni bigint\r\nas\r\nbegin\r\ninsert into TARJETAS(nro_tarjeta,cod_seguridad,fecha_venc,dni)\r\nvalues (@nro_tarjeta,@cod_seguridad,@fecha_venc,@dni)\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_INSERTAR_TARJETA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_MODIFICAR_ARTICULO]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_MODIFICAR_ARTICULO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_MODIFICAR_ARTICULO]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE procedure [dbo].[SP_MODIFICAR_ARTICULO]\r\n@idArticulo int,\r\n@nombre varchar(20),\r\n@stock int,\r\n@precio decimal(10,2),\r\n@idTipoArticulo int,\r\n@idDroga int,\r\n@idLaboratorio int\r\nas\r\nbegin\r\nupdate articulos \r\nset nombre=@nombre, stock=@stock, precioUnitario=@precio, idTipoArticulo=@idTipoArticulo, id_droga=@idDroga, id_laboratorio=@idLaboratorio\r\nWHERE idArticulo = @idArticulo\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_MODIFICAR_ARTICULO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_MODIFICAR_CLIENTE]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_MODIFICAR_CLIENTE' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_MODIFICAR_CLIENTE]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE procedure [dbo].[SP_MODIFICAR_CLIENTE]\r\n@DNI bigint,\r\n@nombreCliente varchar(20),\r\n@apellidoCliente varchar(20),\r\n@telefono bigint\r\nas\r\nbegin\r\nupdate clientes \r\nset nombre=@nombreCliente, apellido=@apellidoCliente, telefono=@telefono\r\nWHERE dni = @DNI\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_MODIFICAR_CLIENTE' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_OBTENER_DATOS_USUARIO]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_OBTENER_DATOS_USUARIO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_OBTENER_DATOS_USUARIO]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","CREATE procedure [dbo].[SP_OBTENER_DATOS_USUARIO]\r\n@usuario nvarchar(20),\r\n@contraseña nvarchar(20), \r\n@idUsuario int OUTPUT,\r\n@nombre varchar(20) OUTPUT,\r\n@apellido varchar(20) OUTPUT,\r\n@tipoUsuario int OUTPUT\r\nas\r\nbegin\r\nSelect usuario, pwd from usuarios \r\nwhere usuario=@usuario and pwd=@contraseña\r\nset @idUsuario = (select max(idUsuario) from usuarios where usuario=@usuario and pwd=@contraseña)\r\nset @nombre = (select nombre from usuarios where usuario=@usuario and pwd=@contraseña)\r\nset @apellido = (select apellido from usuarios where usuario=@usuario and pwd=@contraseña)\r\nset @tipoUsuario = (select idTipoUsuario from usuarios where usuario=@usuario and pwd=@contraseña)\r\nend\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_OBTENER_DATOS_USUARIO' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_PROXIMA_FACTURA]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_PROXIMA_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_PROXIMA_FACTURA]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","create PROCEDURE [dbo].[SP_PROXIMA_FACTURA]\r\n@next int OUTPUT\r\nAS\r\nBEGIN\r\n\tSET @next = (SELECT MAX(idFactura)+1  FROM FACTURAS);\r\nEND\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_PROXIMA_FACTURA' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [dbo].[SP_VERIFICAR_LOGIN]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_VERIFICAR_LOGIN' and @Schema='dbo']","object_type":"StoredProcedure"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["/****** Object:  StoredProcedure [dbo].[SP_VERIFICAR_LOGIN]    Script Date: 04/11/2022 18:03:06 ******/\r\nSET ANSI_NULLS ON\r\n","GO\r\n","SET QUOTED_IDENTIFIER ON\r\n","GO\r\n","\r\ncreate procedure [dbo].[SP_VERIFICAR_LOGIN]\r\n@usuario nvarchar(20),\r\n@contraseña nvarchar(20)\r\nas\r\nbegin\r\nSelect usuario, pwd from usuarios \r\nwhere usuario=@usuario and pwd=@contraseña\r\nend\r\n\r\nGO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']/StoredProcedure[@Name='SP_VERIFICAR_LOGIN' and @Schema='dbo']","object_type":"StoredProcedure"}},{"cell_type":"markdown","source":["# [farmatown3]"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']","object_type":"Database"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["USE [master]\r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']","object_type":"Database"}},{"outputs":[],"execution_count":0,"cell_type":"code","source":["ALTER DATABASE [farmatown3] SET  READ_WRITE \r\n","GO\r\n"],"metadata":{"urn":"Server[@Name='NOE-PC\\SQLEXPRESS']/Database[@Name='farmatown3']","object_type":"Database"}}]}
+
+USE [master]
+GO
+/****** Object:  Database [farmatown3]    Script Date: 04/11/2022 23:45:23 ******/
+CREATE DATABASE [farmatown3] 
+GO
+
+USE [farmatown3]
+GO
+/****** Object:  Table [dbo].[facturas]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[facturas](
+	[idFactura] [int] IDENTITY(1,1) NOT NULL,
+	[fecha] [date] NULL,
+	[total] [decimal](10, 2) NULL,
+	[tieneObraSocial] [bit] NULL,
+	[dniCliente] [bigint] NULL,
+	[idUsuario] [int] NULL,
+	[tipoPago] [bit] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idFactura] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  View [dbo].[facturasObraSocial]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create view [dbo].[facturasObraSocial]
+as
+select count(idFactura) Cantidad_Con_OS, (select count(idFactura) from facturas where tieneObraSocial = 0) as Cantidad_Sin_OS from facturas where tieneObraSocial = 1
+GO
+/****** Object:  Table [dbo].[articulos]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[articulos](
+	[idArticulo] [int] IDENTITY(1,1) NOT NULL,
+	[nombre] [varchar](100) NULL,
+	[stock] [int] NULL,
+	[precioUnitario] [decimal](10, 2) NULL,
+	[idTipoArticulo] [int] NULL,
+	[id_droga] [int] NULL,
+	[id_laboratorio] [int] NULL,
+	[fecha_vto] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idArticulo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[clientes]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[clientes](
+	[dni] [bigint] NOT NULL,
+	[nombre] [varchar](20) NULL,
+	[apellido] [varchar](20) NULL,
+	[telefono] [bigint] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[dni] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[detalle_lote]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[detalle_lote](
+	[id_detalle_lote] [int] IDENTITY(1,1) NOT NULL,
+	[idArticulo] [int] NULL,
+	[id_lote] [int] NULL,
+	[cantidad_comprada] [int] NULL,
+	[precio_compra] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_detalle_lote] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[detallesFactura]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[detallesFactura](
+	[idDetalle] [int] IDENTITY(1,1) NOT NULL,
+	[idFactura] [int] NULL,
+	[idArticulo] [int] NULL,
+	[descuento] [int] NULL,
+	[montoDescontado] [decimal](10, 2) NULL,
+	[subtotal] [decimal](10, 2) NULL,
+	[cantidad] [int] NULL,
+	[precio] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idDetalle] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[drogas]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[drogas](
+	[id_droga] [int] IDENTITY(1,1) NOT NULL,
+	[nombreDroga] [varchar](40) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_droga] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[laboratorios]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[laboratorios](
+	[id_laboratorio] [int] IDENTITY(1,1) NOT NULL,
+	[nombreLab] [varchar](40) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_laboratorio] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[lotes]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[lotes](
+	[id_lote] [int] IDENTITY(1,1) NOT NULL,
+	[fecha_lote] [date] NULL,
+	[total] [decimal](10, 2) NULL,
+	[id_proveedor] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_lote] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[proveedores]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[proveedores](
+	[id_proveedor] [int] IDENTITY(1,1) NOT NULL,
+	[nombre_proveedor] [varchar](40) NULL,
+	[cuit] [bigint] NULL,
+	[direccion] [varchar](25) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[id_proveedor] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tarjetas]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tarjetas](
+	[nro_tarjeta] [bigint] NOT NULL,
+	[cod_seguridad] [int] NULL,
+	[fecha_venc] [date] NULL,
+	[dni] [bigint] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[nro_tarjeta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tipoArticulos]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tipoArticulos](
+	[idTipoArticulo] [int] IDENTITY(1,1) NOT NULL,
+	[descripcion] [varchar](20) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idTipoArticulo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tipoPago]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tipoPago](
+	[tipoPago] [bit] NOT NULL,
+	[descripcion] [varchar](25) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[tipoPago] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[tipoUsuarios]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tipoUsuarios](
+	[idTipoUsuario] [int] NOT NULL,
+	[descripcion] [varchar](15) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idTipoUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[usuarios]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[usuarios](
+	[idUsuario] [int] IDENTITY(1,1) NOT NULL,
+	[usuario] [varchar](15) NULL,
+	[pwd] [varchar](15) NULL,
+	[nombre] [varchar](20) NULL,
+	[apellido] [varchar](20) NULL,
+	[idTipoUsuario] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[idUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[articulos] ON 
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (1, N'ibuprofeno 600mg 20 comp', 102, CAST(400.00 AS Decimal(10, 2)), 1, 4, 1, CAST(N'2022-12-02' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (2, N'ibuprofeno 400mg 20 comp', 100, CAST(300.00 AS Decimal(10, 2)), 1, 4, 1, CAST(N'2022-12-02' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (3, N'ibuprofeno 600mg 30 ', 100, CAST(550.00 AS Decimal(10, 2)), 1, 4, 1, CAST(N'2022-12-02' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (4, N'ibuevanol 20 caps', 101, CAST(350.00 AS Decimal(10, 2)), 1, 1, 1, CAST(N'2022-12-02' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (5, N'ibuevanol plus 20 caps', 101, CAST(450.00 AS Decimal(10, 2)), 1, 4, 3, CAST(N'2022-12-02' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (6, N'ibuevanol forte 10 caps', 100, CAST(500.00 AS Decimal(10, 2)), 1, 4, 3, CAST(N'2022-12-02' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (7, N'bayaspirina 650mg 20 comp', 100, CAST(400.00 AS Decimal(10, 2)), 1, 2, 2, CAST(N'2022-12-02' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (8, N'ibuevanol forte 10 comp', 100, CAST(450.00 AS Decimal(10, 2)), 1, 2, 2, CAST(N'2022-12-02' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (9, N'aspirina 500mg 20 comp', 103, CAST(450.00 AS Decimal(10, 2)), 1, 2, 2, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (10, N'aspirina 400mg 40 comp', 100, CAST(700.00 AS Decimal(10, 2)), 1, 2, 2, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (11, N'elissan 2mg 20 comp', 50, CAST(300.00 AS Decimal(10, 2)), 1, 1, 5, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (12, N'elissan 2mg 10 comp', 50, CAST(250.00 AS Decimal(10, 2)), 1, 1, 5, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (13, N'mentholatum 85g', 20, CAST(600.00 AS Decimal(10, 2)), 1, 5, 2, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (14, N'aziatop 20mg 14 caps', 80, CAST(500.00 AS Decimal(10, 2)), 1, 3, 4, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (15, N'omeprazol 20mg 14 caps', 80, CAST(550.00 AS Decimal(10, 2)), 1, 3, 4, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (16, N'acetaminofen 500mg 20 comp', 80, CAST(400.00 AS Decimal(10, 2)), 1, 9, 5, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (17, N'tylenol 500mg 20 comp', 80, CAST(420.00 AS Decimal(10, 2)), 1, 9, 5, CAST(N'2022-12-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (18, N'panadol 500mg 16 comp', 80, CAST(480.00 AS Decimal(10, 2)), 1, 9, 5, CAST(N'2022-12-29' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (19, N'loperamida 2mg 6 comp', 40, CAST(200.00 AS Decimal(10, 2)), 1, 1, 3, CAST(N'2022-12-29' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (20, N'fortasec flas 2mg 500 20 comp', 80, CAST(400.00 AS Decimal(10, 2)), 1, 1, 5, CAST(N'2022-12-29' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (21, N'bialcohol 1000ml', 20, CAST(900.00 AS Decimal(10, 2)), 5, 6, 6, CAST(N'2022-12-29' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (22, N'bialcohol 250ml', 20, CAST(400.00 AS Decimal(10, 2)), 5, 6, 6, CAST(N'2022-12-29' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (23, N'sanicol 500ml', 20, CAST(900.00 AS Decimal(10, 2)), 5, 6, 4, CAST(N'2022-12-29' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (24, N'toy boy 50ml', 5, CAST(2000.00 AS Decimal(10, 2)), 2, 7, 7, CAST(N'2022-12-29' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (25, N'Ebano Salvia 100ml', 5, CAST(2500.00 AS Decimal(10, 2)), 2, 7, 7, CAST(N'2022-12-29' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (26, N'loewe 100ml', 5, CAST(4000.00 AS Decimal(10, 2)), 2, 7, 7, CAST(N'2023-01-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (27, N'bagovit A 50g', 30, CAST(800.00 AS Decimal(10, 2)), 3, 8, 2, CAST(N'2023-01-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (28, N'loreal 100g', 27, CAST(700.00 AS Decimal(10, 2)), 3, 8, 2, CAST(N'2023-01-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (29, N'dermaglos 50g', 25, CAST(900.00 AS Decimal(10, 2)), 3, 8, 2, CAST(N'2023-01-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (30, N'neutrogena 75g', 25, CAST(800.00 AS Decimal(10, 2)), 3, 8, 3, CAST(N'2023-01-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (31, N'pañuelos elite', 200, CAST(150.00 AS Decimal(10, 2)), 4, 8, 5, CAST(N'2023-01-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (32, N'barbijo descartable', 400, CAST(50.00 AS Decimal(10, 2)), 4, 8, 5, CAST(N'2023-01-15' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (33, N'pañuelos achiss', 200, CAST(145.00 AS Decimal(10, 2)), 4, 8, 5, CAST(N'2023-02-03' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (34, N'pañales comodin 10u', 150, CAST(1800.00 AS Decimal(10, 2)), 4, 8, 5, CAST(N'2023-02-03' AS Date))
+GO
+INSERT [dbo].[articulos] ([idArticulo], [nombre], [stock], [precioUnitario], [idTipoArticulo], [id_droga], [id_laboratorio], [fecha_vto]) VALUES (35, N'estrella hisopo 125u', 40, CAST(200.00 AS Decimal(10, 2)), 4, 8, 4, CAST(N'2023-02-03' AS Date))
+GO
+SET IDENTITY_INSERT [dbo].[articulos] OFF
+GO
+INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (1212, N'prueba', N'prue', 531255)
+GO
+INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (11111, N'gas', N'gas', 435543)
+GO
+INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (123123, N'fran', N'Valenzuela', 545454)
+GO
+INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (13456789, N'rocco', N'hola', 132341)
+GO
+INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (24578124, N'Diego', N'Ferreyra', 4578745)
+GO
+INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (24875478, N'Juan', N'Perez', 4571545)
+GO
+INSERT [dbo].[clientes] ([dni], [nombre], [apellido], [telefono]) VALUES (25547845, N'Flor', N'Perezz', 4578460)
+GO
+SET IDENTITY_INSERT [dbo].[detalle_lote] ON 
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (1, 1, 1, 102, CAST(240.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (2, 2, 1, 100, CAST(180.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (3, 3, 1, 100, CAST(320.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (4, 4, 1, 101, CAST(230.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (5, 5, 1, 101, CAST(230.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (6, 6, 2, 100, CAST(340.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (8, 8, 2, 100, CAST(240.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (9, 9, 2, 103, CAST(235.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (10, 10, 2, 100, CAST(500.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (11, 11, 2, 50, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (12, 12, 3, 50, CAST(160.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (13, 13, 3, 20, CAST(400.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (14, 14, 3, 80, CAST(350.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (15, 15, 3, 80, CAST(380.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (16, 16, 3, 80, CAST(260.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (17, 17, 3, 80, CAST(300.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (18, 18, 4, 80, CAST(330.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (19, 19, 4, 40, CAST(130.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (20, 20, 4, 80, CAST(300.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (21, 21, 4, 20, CAST(630.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (22, 22, 4, 20, CAST(290.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (23, 23, 4, 20, CAST(650.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (24, 24, 5, 5, CAST(1450.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (25, 25, 5, 5, CAST(1850.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (26, 26, 5, 5, CAST(3000.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (27, 27, 5, 30, CAST(550.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (28, 28, 5, 27, CAST(480.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (29, 29, 5, 25, CAST(630.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (30, 30, 6, 25, CAST(600.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (31, 31, 6, 200, CAST(180.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (32, 32, 6, 400, CAST(35.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (33, 33, 6, 200, CAST(90.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (34, 34, 6, 150, CAST(1400.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (35, 35, 6, 40, CAST(145.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (38, 1, 8, 2, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (39, 1, 8, 2, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (40, 2, 8, 1, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (41, 3, 9, 2, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (42, 3, 9, 2, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (43, 1, 15, 5, CAST(100.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (45, 5, 17, 2, CAST(450.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (46, 7, 18, 5, CAST(400.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (47, 4, 18, 3, CAST(350.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (48, 10, 18, 3, CAST(700.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (49, 2, 19, 3, CAST(300.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (50, 5, 19, 3, CAST(450.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detalle_lote] ([id_detalle_lote], [idArticulo], [id_lote], [cantidad_comprada], [precio_compra]) VALUES (51, 3, 22, 2, CAST(550.00 AS Decimal(10, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[detalle_lote] OFF
+GO
+SET IDENTITY_INSERT [dbo].[detallesFactura] ON 
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (16, 6, 3, 15, CAST(555.00 AS Decimal(10, 2)), CAST(3145.00 AS Decimal(10, 2)), 1, CAST(3700.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (22, 13, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(600.00 AS Decimal(10, 2)), 3, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (23, 14, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(1000.00 AS Decimal(10, 2)), 5, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (24, 15, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(200.00 AS Decimal(10, 2)), 1, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (25, 16, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(400.00 AS Decimal(10, 2)), 2, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (26, 17, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(400.00 AS Decimal(10, 2)), 2, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (27, 18, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(400.00 AS Decimal(10, 2)), 2, CAST(200.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (29, 20, 3, 0, CAST(0.00 AS Decimal(10, 2)), CAST(3700.00 AS Decimal(10, 2)), 1, CAST(3700.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (30, 21, 1, 0, CAST(0.00 AS Decimal(10, 2)), CAST(400.00 AS Decimal(10, 2)), 1, CAST(400.00 AS Decimal(10, 2)))
+GO
+INSERT [dbo].[detallesFactura] ([idDetalle], [idFactura], [idArticulo], [descuento], [montoDescontado], [subtotal], [cantidad], [precio]) VALUES (31, 21, 28, 0, CAST(0.00 AS Decimal(10, 2)), CAST(2100.00 AS Decimal(10, 2)), 3, CAST(700.00 AS Decimal(10, 2)))
+GO
+SET IDENTITY_INSERT [dbo].[detallesFactura] OFF
+GO
+SET IDENTITY_INSERT [dbo].[drogas] ON 
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (1, N'Loperamida')
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (2, N'Aspirina')
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (3, N'Omeprazol')
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (4, N'Ibuprofeno')
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (5, N'Alcanfor')
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (6, N'Alcohol')
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (7, N'Aceite esencial')
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (8, N'Ninguna')
+GO
+INSERT [dbo].[drogas] ([id_droga], [nombreDroga]) VALUES (9, N'Acetaminofen')
+GO
+SET IDENTITY_INSERT [dbo].[drogas] OFF
+GO
+SET IDENTITY_INSERT [dbo].[facturas] ON 
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (6, CAST(N'2022-09-30' AS Date), CAST(3505.00 AS Decimal(10, 2)), 1, 13456789, 3, 0)
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (13, CAST(N'2022-10-07' AS Date), CAST(600.00 AS Decimal(10, 2)), 0, 123123, 1, NULL)
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (14, CAST(N'2022-10-07' AS Date), CAST(1000.00 AS Decimal(10, 2)), 0, 25547845, 1, NULL)
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (15, CAST(N'2022-10-07' AS Date), CAST(200.00 AS Decimal(10, 2)), 0, 24578124, 1, NULL)
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (16, CAST(N'2022-10-07' AS Date), CAST(400.00 AS Decimal(10, 2)), 0, 123123, 1, NULL)
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (17, CAST(N'2022-10-07' AS Date), CAST(400.00 AS Decimal(10, 2)), 0, 123123, 1, NULL)
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (18, CAST(N'2022-10-07' AS Date), CAST(400.00 AS Decimal(10, 2)), 0, 123123, 1, 1)
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (20, CAST(N'2022-10-10' AS Date), CAST(3700.00 AS Decimal(10, 2)), 0, 13456789, 3, 0)
+GO
+INSERT [dbo].[facturas] ([idFactura], [fecha], [total], [tieneObraSocial], [dniCliente], [idUsuario], [tipoPago]) VALUES (21, CAST(N'2022-11-02' AS Date), CAST(2500.00 AS Decimal(10, 2)), 1, 11111, 3, 0)
+GO
+SET IDENTITY_INSERT [dbo].[facturas] OFF
+GO
+SET IDENTITY_INSERT [dbo].[laboratorios] ON 
+GO
+INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (1, N'Drogueria Argentina S.A.')
+GO
+INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (2, N'Química Luar')
+GO
+INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (3, N'Lazar')
+GO
+INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (4, N'Tablada SRL')
+GO
+INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (5, N'Norton SRL')
+GO
+INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (6, N'Porta')
+GO
+INSERT [dbo].[laboratorios] ([id_laboratorio], [nombreLab]) VALUES (7, N'Distribuidor de Perfumes')
+GO
+SET IDENTITY_INSERT [dbo].[laboratorios] OFF
+GO
+SET IDENTITY_INSERT [dbo].[lotes] ON 
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (1, CAST(N'2022-10-28' AS Date), CAST(120940.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (2, CAST(N'2022-10-25' AS Date), CAST(168205.00 AS Decimal(10, 2)), 2)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (3, CAST(N'2022-10-22' AS Date), CAST(88800.00 AS Decimal(10, 2)), 3)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (4, CAST(N'2022-10-26' AS Date), CAST(87000.00 AS Decimal(10, 2)), 2)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (5, CAST(N'2022-10-28' AS Date), CAST(76710.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (6, CAST(N'2022-10-26' AS Date), CAST(298800.00 AS Decimal(10, 2)), 4)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (8, CAST(N'2022-10-29' AS Date), CAST(1000.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (9, CAST(N'2022-10-29' AS Date), CAST(15000.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (10, CAST(N'2022-10-29' AS Date), CAST(16000.00 AS Decimal(10, 2)), 2)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (11, CAST(N'2022-10-29' AS Date), CAST(20000.00 AS Decimal(10, 2)), 4)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (13, CAST(N'2022-11-01' AS Date), CAST(100.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (14, CAST(N'2022-10-02' AS Date), CAST(1650.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (15, CAST(N'2022-10-02' AS Date), CAST(1100.00 AS Decimal(10, 2)), 2)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (16, CAST(N'2022-10-02' AS Date), CAST(1100.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (17, CAST(N'2022-10-02' AS Date), CAST(900.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (18, CAST(N'2022-10-02' AS Date), CAST(5150.00 AS Decimal(10, 2)), 2)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (19, CAST(N'2022-10-02' AS Date), CAST(2250.00 AS Decimal(10, 2)), 1)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (20, CAST(N'2022-10-02' AS Date), CAST(1500.00 AS Decimal(10, 2)), 2)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (21, CAST(N'2022-10-02' AS Date), CAST(2600.00 AS Decimal(10, 2)), 2)
+GO
+INSERT [dbo].[lotes] ([id_lote], [fecha_lote], [total], [id_proveedor]) VALUES (22, CAST(N'2022-10-02' AS Date), CAST(1100.00 AS Decimal(10, 2)), 1)
+GO
+SET IDENTITY_INSERT [dbo].[lotes] OFF
+GO
+SET IDENTITY_INSERT [dbo].[proveedores] ON 
+GO
+INSERT [dbo].[proveedores] ([id_proveedor], [nombre_proveedor], [cuit], [direccion]) VALUES (1, N'Drogueria MG S.R.L', 30500006613, N'malaga 1610')
+GO
+INSERT [dbo].[proveedores] ([id_proveedor], [nombre_proveedor], [cuit], [direccion]) VALUES (2, N'Drogueria Capdevilla S.R.L', 30663205621, N'francisco suarez 2760')
+GO
+INSERT [dbo].[proveedores] ([id_proveedor], [nombre_proveedor], [cuit], [direccion]) VALUES (3, N'Drogueria Decade', 30500057102, N'fragueiro 474')
+GO
+INSERT [dbo].[proveedores] ([id_proveedor], [nombre_proveedor], [cuit], [direccion]) VALUES (4, N'P&G', 30604958640, N'roberto cayol 3799')
+GO
+SET IDENTITY_INSERT [dbo].[proveedores] OFF
+GO
+INSERT [dbo].[tarjetas] ([nro_tarjeta], [cod_seguridad], [fecha_venc], [dni]) VALUES (10101010, 123, CAST(N'2026-10-10' AS Date), 1212)
+GO
+INSERT [dbo].[tarjetas] ([nro_tarjeta], [cod_seguridad], [fecha_venc], [dni]) VALUES (125478458, 154, CAST(N'2022-10-30' AS Date), 25547845)
+GO
+INSERT [dbo].[tarjetas] ([nro_tarjeta], [cod_seguridad], [fecha_venc], [dni]) VALUES (1122334455667788, 12, CAST(N'2022-10-07' AS Date), 123123)
+GO
+SET IDENTITY_INSERT [dbo].[tipoArticulos] ON 
+GO
+INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (1, N'Medicamento')
+GO
+INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (2, N'Perfumeria')
+GO
+INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (3, N'Cosmetico')
+GO
+INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (4, N'Descartable')
+GO
+INSERT [dbo].[tipoArticulos] ([idTipoArticulo], [descripcion]) VALUES (5, N'Desinfectante')
+GO
+SET IDENTITY_INSERT [dbo].[tipoArticulos] OFF
+GO
+INSERT [dbo].[tipoPago] ([tipoPago], [descripcion]) VALUES (0, N'efectivo')
+GO
+INSERT [dbo].[tipoPago] ([tipoPago], [descripcion]) VALUES (1, N'tarjeta')
+GO
+INSERT [dbo].[tipoUsuarios] ([idTipoUsuario], [descripcion]) VALUES (1, N'admin')
+GO
+INSERT [dbo].[tipoUsuarios] ([idTipoUsuario], [descripcion]) VALUES (2, N'vendedor')
+GO
+INSERT [dbo].[tipoUsuarios] ([idTipoUsuario], [descripcion]) VALUES (3, N'gerente')
+GO
+SET IDENTITY_INSERT [dbo].[usuarios] ON 
+GO
+INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (1, N'fran', N'1234', N'Francisco', N'Valenzuela', 2)
+GO
+INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (2, N'roco', N'1234', N'Matias', N'Etcetera', 2)
+GO
+INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (3, N'gaston', N'12345', N'Gaston', N'Guiñazu', 1)
+GO
+INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (4, N'noe', N'123', N'Noelia', N'Gonzales', 3)
+GO
+INSERT [dbo].[usuarios] ([idUsuario], [usuario], [pwd], [nombre], [apellido], [idTipoUsuario]) VALUES (5, N'Noe', N'katy', N'Noelia', N'Tulian', 2)
+GO
+SET IDENTITY_INSERT [dbo].[usuarios] OFF
+GO
+ALTER TABLE [dbo].[articulos]  WITH CHECK ADD FOREIGN KEY([idTipoArticulo])
+REFERENCES [dbo].[tipoArticulos] ([idTipoArticulo])
+GO
+ALTER TABLE [dbo].[articulos]  WITH CHECK ADD  CONSTRAINT [fk_droga] FOREIGN KEY([id_droga])
+REFERENCES [dbo].[drogas] ([id_droga])
+GO
+ALTER TABLE [dbo].[articulos] CHECK CONSTRAINT [fk_droga]
+GO
+ALTER TABLE [dbo].[articulos]  WITH CHECK ADD  CONSTRAINT [fk_laboratorio] FOREIGN KEY([id_laboratorio])
+REFERENCES [dbo].[laboratorios] ([id_laboratorio])
+GO
+ALTER TABLE [dbo].[articulos] CHECK CONSTRAINT [fk_laboratorio]
+GO
+ALTER TABLE [dbo].[detalle_lote]  WITH CHECK ADD FOREIGN KEY([id_lote])
+REFERENCES [dbo].[lotes] ([id_lote])
+GO
+ALTER TABLE [dbo].[detalle_lote]  WITH CHECK ADD FOREIGN KEY([idArticulo])
+REFERENCES [dbo].[articulos] ([idArticulo])
+GO
+ALTER TABLE [dbo].[detallesFactura]  WITH CHECK ADD FOREIGN KEY([idArticulo])
+REFERENCES [dbo].[articulos] ([idArticulo])
+GO
+ALTER TABLE [dbo].[detallesFactura]  WITH CHECK ADD FOREIGN KEY([idFactura])
+REFERENCES [dbo].[facturas] ([idFactura])
+GO
+ALTER TABLE [dbo].[facturas]  WITH CHECK ADD FOREIGN KEY([dniCliente])
+REFERENCES [dbo].[clientes] ([dni])
+GO
+ALTER TABLE [dbo].[facturas]  WITH CHECK ADD FOREIGN KEY([idUsuario])
+REFERENCES [dbo].[usuarios] ([idUsuario])
+GO
+ALTER TABLE [dbo].[facturas]  WITH CHECK ADD FOREIGN KEY([tipoPago])
+REFERENCES [dbo].[tipoPago] ([tipoPago])
+GO
+ALTER TABLE [dbo].[lotes]  WITH CHECK ADD FOREIGN KEY([id_proveedor])
+REFERENCES [dbo].[proveedores] ([id_proveedor])
+GO
+ALTER TABLE [dbo].[tarjetas]  WITH CHECK ADD FOREIGN KEY([dni])
+REFERENCES [dbo].[clientes] ([dni])
+GO
+ALTER TABLE [dbo].[usuarios]  WITH CHECK ADD FOREIGN KEY([idTipoUsuario])
+REFERENCES [dbo].[tipoUsuarios] ([idTipoUsuario])
+GO
+/****** Object:  StoredProcedure [dbo].[sp_articulosVendidos]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[sp_articulosVendidos]
+@mes int
+as
+begin
+select top 10 a.nombre as Articulo , sum(cantidad) as Cantidad_vendida, month(f2.fecha) as Mes,year(f2.fecha) as Año
+from detallesFactura f join articulos a on a.idArticulo=f.idArticulo join
+facturas f2 on f2.idFactura=f.idFactura
+where month(f2.fecha)=@mes
+group by month(f2.fecha),year(f2.fecha),a.nombre
+order by Cantidad_vendida desc
+end
+GO
+/****** Object:  StoredProcedure [dbo].[sp_clientesFrecuentes]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[sp_clientesFrecuentes]
+ as
+select top 3 c.nombre+' '+c.apellido AS Nombre, count(dniCliente) as Compras_totales 
+from clientes c, facturas f where c.dni = f.dniCliente group by c.nombre, c.apellido order by count(dniCliente) desc
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX]
+AS
+BEGIN
+		SELECT idArticulo, nombre +' | $' + convert(varchar(100), precioUnitario) as Articulo, tp.idTipoArticulo, descripcion,d.id_droga, nombreDroga, l.id_laboratorio, nombreLab,
+	a.precioUnitario
+	from articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo
+	JOIN laboratorios l ON a.id_laboratorio = l.id_laboratorio
+	JOIN drogas d ON a.id_droga= d.id_droga;
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX_FILTRO]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_COMBO_BOX_FILTRO]
+@filtro varchar(20)
+AS
+BEGIN
+	
+	SELECT idArticulo, nombre, a.idTipoArticulo,descripcion,precioUnitario 
+	from articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo
+	where nombre like @filtro+'%';
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_GRILLA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_GRILLA]
+AS
+BEGIN
+	
+	SELECT idArticulo, nombre, tp.idTipoArticulo, descripcion,d.id_droga, nombreDroga, l.id_laboratorio, nombreLab,
+	a.precioUnitario,stock
+	from articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo
+	JOIN laboratorios l ON a.id_laboratorio = l.id_laboratorio
+	JOIN drogas d ON a.id_droga= d.id_droga;
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_POR_DROGA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_POR_DROGA]
+@droga nvarchar(100)
+AS
+BEGIN
+	
+	SELECT idArticulo, nombre, tp.idTipoArticulo, descripcion,d.id_droga, nombreDroga, l.id_laboratorio, nombreLab,
+	a.precioUnitario,stock
+	from articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo
+	JOIN laboratorios l ON a.id_laboratorio = l.id_laboratorio
+	JOIN drogas d ON a.id_droga= d.id_droga
+	where nombreDroga like '%'+@droga+'%'
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_ARTICULOS_POR_NOMBRE]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_ARTICULOS_POR_NOMBRE]
+@nombre nvarchar(100)
+AS
+BEGIN
+	
+	SELECT idArticulo, nombre, tp.idTipoArticulo, descripcion,d.id_droga, nombreDroga, l.id_laboratorio, nombreLab,
+	a.precioUnitario,stock
+	from articulos a join tipoArticulos tp on a.idTipoArticulo=tp.idTipoArticulo
+	JOIN laboratorios l ON a.id_laboratorio = l.id_laboratorio
+	JOIN drogas d ON a.id_droga= d.id_droga
+	where nombre like '%'+@nombre+'%'
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_CLIENTES]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SP_CONSULTAR_CLIENTES]
+AS
+BEGIN
+	
+	select nombre,apellido,dni,telefono from clientes
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_CLIENTES_CON_TARJETA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_CLIENTES_CON_TARJETA]
+AS
+BEGIN	
+select nombre,apellido,c.dni,telefono, nro_tarjeta,cod_seguridad, fecha_venc from clientes c LEFT JOIN tarjetas t ON c.dni = t.dni
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_CLIENTES_POR_DNI]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_CLIENTES_POR_DNI]
+@DNI bigint
+AS
+BEGIN
+	
+	select nombre,apellido,dni,telefono from clientes
+	where dni = @DNI
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_DETALLES_POR_ID_FACTURA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[SP_CONSULTAR_DETALLES_POR_ID_FACTURA]
+@idFactura int
+as
+begin
+select idDetalle, a.nombre, cantidad,df.precio,montoDescontado,subtotal 
+from detallesFactura df 
+join articulos a on df.idArticulo=a.idArticulo
+where idFactura=@idFactura 
+end
+
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_DROGAS_COMBO_BOX_ARTICULOS]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_DROGAS_COMBO_BOX_ARTICULOS]
+AS
+BEGIN	
+	SELECT * FROM drogas;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_FACTURA_POR_FECHA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[SP_CONSULTAR_FACTURA_POR_FECHA]
+@fechaDesde datetime,
+@fechaHasta datetime
+as
+begin
+SELECT idFactura, c.apellido + ' ' +c.nombre 'Cliente', fecha, total 
+from facturas f join clientes c on f.dniCliente=c.dni
+where f.fecha between @fechaDesde and @fechaHasta
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_FACTURAS]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_FACTURAS]
+AS
+BEGIN
+	SELECT idFactura, c.apellido + ' ' +c.nombre 'Nombre', fecha, total, p.descripcion
+	from facturas f join clientes c on f.dniCliente=c.dni join tipoPago p on p.tipoPago=f.tipoPago
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_LABORATORIOS_COMBO_BOX_ARTICULOS]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_CONSULTAR_LABORATORIOS_COMBO_BOX_ARTICULOS]
+AS
+BEGIN	
+	SELECT * FROM laboratorios;
+END	
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_STOCK]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_CONSULTAR_STOCK]
+@idArticulo int,
+@stock int OUTPUT
+as
+begin
+set @stock = (select stock from articulos where idArticulo=@idArticulo)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_TIPO_ARTICULOS_COMBO_BOX]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[SP_CONSULTAR_TIPO_ARTICULOS_COMBO_BOX]
+as
+begin
+	select * from tipoArticulos
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_TIPOS_USUARIO_COMBO_BOX]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SP_CONSULTAR_TIPOS_USUARIO_COMBO_BOX]
+AS
+BEGIN
+	select * from  tipoUsuarios 
+END	 
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CONSULTAR_USUARIOS_GRILLA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[SP_CONSULTAR_USUARIOS_GRILLA]
+as
+begin
+select idUsuario,nombre,apellido,tu.descripcion 
+from usuarios u join tipoUsuarios tu on u.idTipoUsuario=tu.idTipoUsuario
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_CREAR_USUARIO]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[SP_CREAR_USUARIO]
+@nombreReal nvarchar(20),
+@apellido nvarchar(20),
+@username nvarchar(20),
+@password nvarchar(20),
+@tipoUsuario int
+as
+begin
+insert into usuarios(usuario,pwd,nombre,apellido,idTipoUsuario)
+values(@username,@password,@nombreReal,@apellido,@tipoUsuario)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_ELIMINAR_DETALLE]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[SP_ELIMINAR_DETALLE]
+@idDetalle int
+as
+begin
+delete from detallesFactura 
+where idDetalle=@idDetalle
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_ELIMINAR_DETALLES]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[SP_ELIMINAR_DETALLES]
+@idDetalle int
+as
+begin
+delete from detallesFactura
+where idDetalle=@idDetalle
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_ELIMINAR_FACTURA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure[dbo].[SP_ELIMINAR_FACTURA]
+@idFactura int
+as
+begin
+delete from detallesFactura
+where idFactura=@idFactura
+
+delete from facturas
+where idFactura=@idFactura
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_ARTICULO]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[SP_INSERTAR_ARTICULO]
+@nombreArticulo varchar(20),
+@stock int,
+@precio decimal(10,2),
+@tipoArticulo int
+as
+begin
+insert into articulos(nombre,stock,precioUnitario,idTipoArticulo)
+values (@nombreArticulo,@stock,@precio,@tipoArticulo)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_CLIENTE]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[SP_INSERTAR_CLIENTE]
+@DNI bigint,
+@nom_cliente nvarchar(20),
+@ape_cliente nvarchar(20),
+@telefono bigint
+as
+begin
+insert into CLIENTES(DNI,nombre,apellido,telefono)
+values (@DNI,@nom_cliente,@ape_cliente,@telefono)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_DETALLE_FACTURA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SP_INSERTAR_DETALLE_FACTURA] 
+	@idFactura int,
+	@idArticulo int,
+	@cantidad int,
+	@descuento int,
+	@montoDescontado decimal(10,2),
+	@subtotal decimal(10,2),
+	@precio decimal(10,2)
+AS
+BEGIN
+	INSERT INTO detallesFactura(idFactura, idArticulo, cantidad, descuento, montoDescontado, subtotal,precio)
+    VALUES (@idFactura, @idArticulo, @cantidad, @descuento, @montoDescontado, @subtotal,@precio);
+  
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_MAESTRO_FACTURA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_INSERTAR_MAESTRO_FACTURA] 
+	@total money,
+	@tieneObraSocial bit,
+	@dniCliente bigint,
+	@idUsuario int,
+	@tipoPago bit,
+    @idFactura int output
+	
+AS
+BEGIN
+	INSERT INTO FACTURAS(fecha, total, tieneObraSocial, dniCliente,idUsuario, tipoPago)
+    VALUES (GETDATE(), @total, @tieneObraSocial, @dniCliente, @idUsuario, @tipoPago);	
+    set @idFactura = SCOPE_IDENTITY();
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_INSERTAR_TARJETA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_INSERTAR_TARJETA]
+@nro_tarjeta bigint,
+@cod_seguridad int,
+@fecha_venc date,
+@dni bigint
+as
+begin
+insert into TARJETAS(nro_tarjeta,cod_seguridad,fecha_venc,dni)
+values (@nro_tarjeta,@cod_seguridad,@fecha_venc,@dni)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_MODIFICAR_ARTICULO]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_MODIFICAR_ARTICULO]
+@idArticulo int,
+@nombre varchar(20),
+@stock int,
+@precio decimal(10,2),
+@idTipoArticulo int,
+@idDroga int,
+@idLaboratorio int
+as
+begin
+update articulos 
+set nombre=@nombre, stock=@stock, precioUnitario=@precio, idTipoArticulo=@idTipoArticulo, id_droga=@idDroga, id_laboratorio=@idLaboratorio
+WHERE idArticulo = @idArticulo
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_MODIFICAR_CLIENTE]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_MODIFICAR_CLIENTE]
+@DNI bigint,
+@nombreCliente varchar(20),
+@apellidoCliente varchar(20),
+@telefono bigint
+as
+begin
+update clientes 
+set nombre=@nombreCliente, apellido=@apellidoCliente, telefono=@telefono
+WHERE dni = @DNI
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_OBTENER_DATOS_USUARIO]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[SP_OBTENER_DATOS_USUARIO]
+@usuario nvarchar(20),
+@contraseña nvarchar(20), 
+@idUsuario int OUTPUT,
+@nombre varchar(20) OUTPUT,
+@apellido varchar(20) OUTPUT,
+@tipoUsuario int OUTPUT
+as
+begin
+Select usuario, pwd from usuarios 
+where usuario=@usuario and pwd=@contraseña
+set @idUsuario = (select max(idUsuario) from usuarios where usuario=@usuario and pwd=@contraseña)
+set @nombre = (select nombre from usuarios where usuario=@usuario and pwd=@contraseña)
+set @apellido = (select apellido from usuarios where usuario=@usuario and pwd=@contraseña)
+set @tipoUsuario = (select idTipoUsuario from usuarios where usuario=@usuario and pwd=@contraseña)
+end
+GO
+/****** Object:  StoredProcedure [dbo].[SP_PROXIMA_FACTURA]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SP_PROXIMA_FACTURA]
+@next int OUTPUT
+AS
+BEGIN
+	SET @next = (SELECT MAX(idFactura)+1  FROM FACTURAS);
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SP_VERIFICAR_LOGIN]    Script Date: 04/11/2022 23:45:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[SP_VERIFICAR_LOGIN]
+@usuario nvarchar(20),
+@contraseña nvarchar(20)
+as
+begin
+Select usuario, pwd from usuarios 
+where usuario=@usuario and pwd=@contraseña
+end
+
+GO
+USE [master]
+GO
+ALTER DATABASE [farmatown3] SET  READ_WRITE 
+GO
+
+USE farmatown3
+--TRIGGERS
+go
+--DESCONTAR STOCK LUEGO DE UNA VENTA
+CREATE TRIGGER dbo.TRIG_DESCONTAR_STOCK ON dbo.detallesFactura
+AFTER INSERT
+AS
+Update articulos set stock = stock-D.cantidad 
+from articulos A inner join
+INSERTED as D on D.idArticulo=A.idArticulo
+
+go
+
+--SUMAR STOCK DE LA FACTURA DESPUES DE UNA DEVOLUCION
+CREATE TRIGGER dbo.TRIG_SUMAR_STOCK ON [detallesFactura]
+   for Delete
+   as
+   Update A set a.stock=a.stock + df.cantidad
+   from articulos as A inner join
+   DELETED as df on df.idArticulo=A.idArticulo
+
+go
+
+--RESTAR AL TOTAL DE LA FACTURA DESPUES DE UNA DEVOLUCION
+CREATE TRIGGER dbo.TRIG_ACTUALIZAR_TOTAL_FACTURA ON [detallesFactura]
+	for Delete
+	as
+	Update F set F.total = F.total - df.subtotal
+	from facturas F inner join
+	deleted df on df.idFactura=f.idFactura
+
+	create view vistaArticulosXAño as
+	select a.nombre, sum(df.cantidad) as cantidad, year(f.fecha) as año
+	from articulos a join detallesFactura df on df.idArticulo = a.idArticulo
+	join facturas f on f.idFactura = df.idFactura
+	group by a.nombre, year(f.fecha)
+	
+	create view vistaMasVendidosXMes as
+	select a.nombre, sum(df.cantidad) as cantidad,  Cast(DATEPART(MM, f.fecha) as varchar) + '/' + CAST( DATEPART(yyyy, f.fecha) as varchar) as fecha
+	from articulos a join detallesFactura df on df.idArticulo = a.idArticulo
+	join facturas f on f.idFactura = df.idFactura
+	group by a.nombre, fecha
+
+	create view vistaArticulosAVencer as
+	select a.nombre, l.fecha_lote
+	from lotes l join detalle_lote dl on l.id_lote = dl.id_lote
+	join articulos a on a.idArticulo = dl.idArticulo
+

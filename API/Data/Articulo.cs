@@ -18,6 +18,7 @@ namespace API.Data
         public int? IdTipoArticulo { get; set; }
         public int? IdDroga { get; set; }
         public int? IdLaboratorio { get; set; }
+        public DateTime? FechaVto { get; set; }
 
         public virtual Droga? IdDrogaNavigation { get; set; }
         public virtual Laboratorio? IdLaboratorioNavigation { get; set; }

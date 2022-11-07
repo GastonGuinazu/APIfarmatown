@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\gonza\\Documents\\GitHub\\APIfarmatown\\API\\API.csproj": {}
+    "c:\\Users\\Usuario\\Desktop\\TP\\DesdeGit\\APIfarmatown\\API\\API.csproj": {}
   },
   "projects": {
-    "c:\\Users\\gonza\\Documents\\GitHub\\APIfarmatown\\API\\API.csproj": {
+    "c:\\Users\\Usuario\\Desktop\\TP\\DesdeGit\\APIfarmatown\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\gonza\\Documents\\GitHub\\APIfarmatown\\API\\API.csproj",
+        "projectUniqueName": "c:\\Users\\Usuario\\Desktop\\TP\\DesdeGit\\APIfarmatown\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "c:\\Users\\gonza\\Documents\\GitHub\\APIfarmatown\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\gonza\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\gonza\\Documents\\GitHub\\APIfarmatown\\API\\obj\\",
+        "projectPath": "c:\\Users\\Usuario\\Desktop\\TP\\DesdeGit\\APIfarmatown\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\Usuario\\Desktop\\TP\\DesdeGit\\APIfarmatown\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gonza\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,7 +83,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
