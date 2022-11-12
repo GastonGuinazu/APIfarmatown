@@ -462,12 +462,17 @@ namespace API.Data
 
                 entity.ToView("vistaMasVendidosXMes");
 
+                entity.Property(e => e.Anio)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("anio");
+
                 entity.Property(e => e.Cantidad).HasColumnName("cantidad");
 
-                entity.Property(e => e.Fecha)
-                    .HasMaxLength(61)
+                entity.Property(e => e.Mes)
+                    .HasMaxLength(30)
                     .IsUnicode(false)
-                    .HasColumnName("fecha");
+                    .HasColumnName("mes");
 
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(100)

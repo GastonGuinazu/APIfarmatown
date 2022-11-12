@@ -1221,11 +1221,11 @@ AFTER INSERT ON basket FOR EACH ROW EXECUTE PROCEDURE make_sum();
 	join facturas f on f.idFactura = df.idFactura
 	group by a.nombre, year(f.fecha)
 	
-	create view vistaMasVendidosXMes as
-	select a.nombre, sum(df.cantidad) as cantidad,  Cast(DATEPART(MM, f.fecha) as varchar) + '/' + CAST( DATEPART(yyyy, f.fecha) as varchar) as fecha
+	alter view vistaMasVendidosXMes as
+	select a.nombre, sum(df.cantidad) as cantidad,  Cast(DATEPART(MM, f.fecha) as varchar) as Mes, CAST( DATEPART(yyyy, f.fecha) as varchar) as Año
 	from articulos a join detallesFactura df on df.idArticulo = a.idArticulo
-	join facturas f on f.idFactura = df.idFactura
-	group by a.nombre, fecha
+	join facturas f on f.idFactura = df.idFactura where a.idTipoArticulo = 3
+	group by a.nombre, f.fecha
 
 	alter view vistaArticulosAVencer as
 	select a.nombre, l.fecha_lote
@@ -1234,3 +1234,5 @@ AFTER INSERT ON basket FOR EACH ROW EXECUTE PROCEDURE make_sum();
 	where DATEDIFF(MONTH, l.fecha_lote, GETDATE()) >= 0
 
 	select * from detalle_lote
+
+	select * from tipoArticulos

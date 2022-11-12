@@ -7,6 +7,7 @@ namespace API.Data
     {
         public string? Nombre { get; set; }
         public int? Cantidad { get; set; }
-        public string? Fecha { get; set; }
+        public string? Mes { get; set; }
+        public string? Anio { get; set; }
     }
 }
