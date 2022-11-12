@@ -28,7 +28,7 @@ public class LotesController : ControllerBase
                               IdLote = l.IdLote,
                               FechaLote = l.FechaLote,
                               Total = l.Total,
-                              Proveedor = new ProveedorModel(p.IdProveedor, p.NombreProveedor, p.Cuit)
+                              idProveedor = p.IdProveedor
                           }).ToListAsync();
 
 
@@ -36,19 +36,18 @@ public class LotesController : ControllerBase
     }
 
     [HttpGet("obtenerDetalles")]
-    public async Task<ActionResult<List<DetalleLoteModel>>> DetallesPorId(int idLote)
+    public async Task<ActionResult<List<DetalleLoteCreateModel>>> DetallesPorId(int idLote)
     {
         var detalles = await _context.DetalleLotes
                             .Join(_context.Articulos,
                             dl => dl.IdArticulo,
                             a => a.IdArticulo,
-                            (dl, a) => new DetalleLoteModel
+                            (dl, a) => new DetalleLoteCreateModel
                             {
-                                IdLote = dl.IdLote,
-                                IdDetalleLote = dl.IdDetalleLote,
+                                IdLote = dl.IdLote,                                
                                 CantidadComprada = dl.CantidadComprada,
                                 PrecioCompra = dl.PrecioCompra,
-                                NombreArticulo = a.Nombre
+                                idArticulo = a.IdArticulo
                             }).Where(x => x.IdLote == idLote)
                             .ToListAsync();
 
@@ -57,9 +56,9 @@ public class LotesController : ControllerBase
 
 
     [HttpPut("ModificarDetalle")]
-    public async Task<ActionResult<DetalleLoteModel>> ModificarDetalle(DetalleLoteModel det)
+    public async Task<ActionResult<DetalleLoteModel>> ModificarDetalle(DetalleModificarModel det)
     {
-        var detalle = await _context.DetalleLotes.FirstOrDefaultAsync(x => x.IdDetalleLote == det.IdDetalleLote);
+        var detalle = await _context.DetalleLotes.FirstOrDefaultAsync(x => x.IdDetalleLote == det.IdDetalle);
 
         if (detalle == null)
         {
@@ -67,7 +66,24 @@ public class LotesController : ControllerBase
         }
         else
         {
-            detalle.CantidadComprada = det.CantidadComprada;
+            detalle.CantidadComprada = det.cantidad;
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+    }
+
+    [HttpPut("ModificarTotalLote")]
+    public async Task<ActionResult<LoteTotalModel>> ModificarTotalLote(LoteTotalModel det)
+    {
+        var detalle = await _context.Lotes.FirstOrDefaultAsync(x => x.IdLote == det.IdLote);
+
+        if (detalle == null)
+        {
+            return NotFound("No se encontro el lote");
+        }
+        else
+        {
+            detalle.Total = det.Total;
             await _context.SaveChangesAsync();
             return Ok();
         }

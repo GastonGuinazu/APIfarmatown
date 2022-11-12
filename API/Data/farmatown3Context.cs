@@ -31,10 +31,17 @@ namespace API.Data
         public virtual DbSet<TipoPago> TipoPagos { get; set; } = null!;
         public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
+        public virtual DbSet<VistaArticulosAvencer> VistaArticulosAvencers { get; set; } = null!;
+        public virtual DbSet<VistaArticulosXaño> VistaArticulosXaños { get; set; } = null!;
+        public virtual DbSet<VistaMasVendidosXme> VistaMasVendidosXmes { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=SERAGON\\SQL;Initial Catalog=farmatown3;Integrated Security=True");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,11 +49,15 @@ namespace API.Data
             modelBuilder.Entity<Articulo>(entity =>
             {
                 entity.HasKey(e => e.IdArticulo)
-                    .HasName("PK__articulo__AABB7422921869E2");
+                    .HasName("PK__articulo__AABB7422A18AEEE1");
 
                 entity.ToTable("articulos");
 
                 entity.Property(e => e.IdArticulo).HasColumnName("idArticulo");
+
+                entity.Property(e => e.FechaVto)
+                    .HasColumnType("date")
+                    .HasColumnName("fecha_vto");
 
                 entity.Property(e => e.IdDroga).HasColumnName("id_droga");
 
@@ -84,7 +95,7 @@ namespace API.Data
             modelBuilder.Entity<Cliente>(entity =>
             {
                 entity.HasKey(e => e.Dni)
-                    .HasName("PK__clientes__D87608A62C385F01");
+                    .HasName("PK__clientes__D87608A6609306DA");
 
                 entity.ToTable("clientes");
 
@@ -108,7 +119,7 @@ namespace API.Data
             modelBuilder.Entity<DetalleLote>(entity =>
             {
                 entity.HasKey(e => e.IdDetalleLote)
-                    .HasName("PK__detalle___FD2F82F4E590C3AF");
+                    .HasName("PK__detalle___FD2F82F4103C55D7");
 
                 entity.ToTable("detalle_lote");
 
@@ -138,7 +149,7 @@ namespace API.Data
             modelBuilder.Entity<DetallesFactura>(entity =>
             {
                 entity.HasKey(e => e.IdDetalle)
-                    .HasName("PK__detalles__49CAE2FB1DEDDFA5");
+                    .HasName("PK__detalles__49CAE2FB63C7A2CE");
 
                 entity.ToTable("detallesFactura");
 
@@ -178,7 +189,7 @@ namespace API.Data
             modelBuilder.Entity<Droga>(entity =>
             {
                 entity.HasKey(e => e.IdDroga)
-                    .HasName("PK__drogas__94A94E7272A60FE1");
+                    .HasName("PK__drogas__94A94E729CAE15FE");
 
                 entity.ToTable("drogas");
 
@@ -193,7 +204,7 @@ namespace API.Data
             modelBuilder.Entity<Factura>(entity =>
             {
                 entity.HasKey(e => e.IdFactura)
-                    .HasName("PK__facturas__3CD5687E669F6884");
+                    .HasName("PK__facturas__3CD5687E56B7C26C");
 
                 entity.ToTable("facturas");
 
@@ -245,7 +256,7 @@ namespace API.Data
             modelBuilder.Entity<Laboratorio>(entity =>
             {
                 entity.HasKey(e => e.IdLaboratorio)
-                    .HasName("PK__laborato__781B42E2173E0024");
+                    .HasName("PK__laborato__781B42E203A91F49");
 
                 entity.ToTable("laboratorios");
 
@@ -260,7 +271,7 @@ namespace API.Data
             modelBuilder.Entity<Lote>(entity =>
             {
                 entity.HasKey(e => e.IdLote)
-                    .HasName("PK__lotes__9A000486EB734BD2");
+                    .HasName("PK__lotes__9A00048614459CE0");
 
                 entity.ToTable("lotes");
 
@@ -285,7 +296,7 @@ namespace API.Data
             modelBuilder.Entity<Proveedore>(entity =>
             {
                 entity.HasKey(e => e.IdProveedor)
-                    .HasName("PK__proveedo__8D3DFE288FD1C952");
+                    .HasName("PK__proveedo__8D3DFE2821EAFF1A");
 
                 entity.ToTable("proveedores");
 
@@ -307,7 +318,7 @@ namespace API.Data
             modelBuilder.Entity<Tarjeta>(entity =>
             {
                 entity.HasKey(e => e.NroTarjeta)
-                    .HasName("PK__tarjetas__8B6B356E48D37FFB");
+                    .HasName("PK__tarjetas__8B6B356E27C1FB79");
 
                 entity.ToTable("tarjetas");
 
@@ -332,7 +343,7 @@ namespace API.Data
             modelBuilder.Entity<TipoArticulo>(entity =>
             {
                 entity.HasKey(e => e.IdTipoArticulo)
-                    .HasName("PK__tipoArti__3FB5FB0EE421EC24");
+                    .HasName("PK__tipoArti__3FB5FB0E14B8B55B");
 
                 entity.ToTable("tipoArticulos");
 
@@ -347,7 +358,7 @@ namespace API.Data
             modelBuilder.Entity<TipoPago>(entity =>
             {
                 entity.HasKey(e => e.TipoPago1)
-                    .HasName("PK__tipoPago__A7F8024CDA5EADB6");
+                    .HasName("PK__tipoPago__A7F8024C7207491D");
 
                 entity.ToTable("tipoPago");
 
@@ -362,7 +373,7 @@ namespace API.Data
             modelBuilder.Entity<TipoUsuario>(entity =>
             {
                 entity.HasKey(e => e.IdTipoUsuario)
-                    .HasName("PK__tipoUsua__03006BFF96FC9EB3");
+                    .HasName("PK__tipoUsua__03006BFF929F3E39");
 
                 entity.ToTable("tipoUsuarios");
 
@@ -379,7 +390,7 @@ namespace API.Data
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__usuarios__645723A65BC140CD");
+                    .HasName("PK__usuarios__645723A6D89941D7");
 
                 entity.ToTable("usuarios");
 
@@ -411,6 +422,62 @@ namespace API.Data
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdTipoUsuario)
                     .HasConstraintName("FK__usuarios__idTipo__49C3F6B7");
+            });
+
+            modelBuilder.Entity<VistaArticulosAvencer>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vistaArticulosAVencer");
+
+                entity.Property(e => e.FechaLote)
+                    .HasColumnType("date")
+                    .HasColumnName("fecha_lote");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("nombre");
+            });
+
+            modelBuilder.Entity<VistaArticulosXaño>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vistaArticulosXAño");
+
+                entity.Property(e => e.Anio).HasColumnName("año");
+
+                entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("nombre");
+            });
+
+            modelBuilder.Entity<VistaMasVendidosXme>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("vistaMasVendidosXMes");
+
+                entity.Property(e => e.Anio)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("anio");
+
+                entity.Property(e => e.Cantidad).HasColumnName("cantidad");
+
+                entity.Property(e => e.Mes)
+                    .HasMaxLength(30)
+                    .IsUnicode(false)
+                    .HasColumnName("mes");
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("nombre");
             });
 
             OnModelCreatingPartial(modelBuilder);
